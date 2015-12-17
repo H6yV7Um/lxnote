@@ -1,0 +1,46 @@
+* 基本概念
+{{git_model.png,450}}
+** 分支branch
+每次checkout切换分支，工作区都会随之改变。
+- checkout有酒店结账，检出的意思，就是表示状态改变了，工作区重置。
+- checkout也不一定切换到分支，可以切换到文件：
+-- git checkout <分支> -- <file>
+
+** 版本库repository
+工作区有一个隐藏目录.git,这个不属于工作区，这是版本库。其中版本库里面存了很多东西，其中最重要的就是stage(暂存区)，还有Git为我们自动创建了第一个分支master,以及指向master的一个指针HEAD。
+** 远程库remote
+
+** 暂存区(stage,index)
+使用Git提交文件到版本库有两步：
+第一步：是使用 git add 把文件添加进去，实际上就是把文件添加到暂存区。
+第二步：使用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支上。
+** 工作区workspace
+就是你在电脑上看到的目录，比如目录下testgit里的文件(.git隐藏目录版本库除外)。或者以后需要再新建的目录文件等等都属于工作区范畴。
+
+* 命令
+- git init #将当前目录变为git可以管理的仓库
+- git add file #添加文件到**_暂存区_**
+- git commit -m "注释"  #提交到仓库
+- git status #查看状态
+- git branch #查看分支
+- git diff readme.txt #查看修改内容
+
+- git log #查看修改历史
+
+* 撤销修改
+- git reset --hard HEAD^  #退回前一个版本
+- git reset --hard HEAD^^  #退回前2个版本
+- git reset --hard HEAD~100  #回退到前100个版本
+
+- git reset  --hard 版本号 #跳到任何一个版本
+- git reflog #获取版本号
+- git checkout -- readme.txt #把readme.txt文件在工作区做的修改全部撤销，这里有2种情况，如下：
+++ readme.txt自动修改后，还没有放到暂存区，使用 撤销修改就回到和版本库一模一样的状态。
+++ 另外一种是readme.txt已经放入暂存区了，接着又作了修改，撤销修改就回到添加暂存区后的状态。
+* 删除文件
+- rm file
+- git commit 即可
+- 只要没有commit之前，如果我想在版本库中恢复此文件如何操作呢？
+-- git checkout -- b.txt
+
+
