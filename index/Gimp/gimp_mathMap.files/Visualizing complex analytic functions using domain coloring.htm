@@ -1,0 +1,1297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><head>
+<meta name="GENERATOR" content="TtH 3.86">
+ <style type="text/css"> div.p { margin-top: 7pt;}</style>
+ <style type="text/css"><!--
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td div.norm {line-height:normal;}
+ span.roman {font-family: serif; font-style: normal; font-weight: normal;} 
+ span.overacc2 {position: relative;  left: .8em; top: -1.2ex;}
+ span.overacc1 {position: relative;  left: .6em; top: -1.2ex;} --></style>
+ 
+
+
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+  <style type="text/css">
+  body {
+    color: black;
+    background: #ffffff;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  :link { color: #0000ff }
+  :visited { color: #990099 }
+  :active { color: #ff0000 }
+  </style>
+  
+  <title>Visualizing complex analytic functions using domain coloring</title>
+</head>
+<body>
+
+
+
+<div class="p"><!----></div>
+ 
+<h1 align="center">Visualizing complex analytic functions using domain coloring </h1>
+
+<h3 align="center"><a href="http://www.mai.liu.se/%7Ehalun/">Hans Lundmark</a><br><br>
+        Department of Mathematics<br>
+        Linköping University, Sweden<br><br>
+        <a href="mailto:halun@mai.liu.se">halun@mai.liu.se</a> <br><br>
+        May 2004 </h3>
+
+<h3 align="center"> </h3>
+
+<div class="p"><!----></div>
+<b>Important note:</b> Do the math symbols in the text below look strange?
+Then go to <a href="http://www.mai.liu.se/%7Ehanlu09/complex/">the start page</a> and try another version of this document.
+
+
+<div class="p"><!----></div>
+ntroduction
+
+<div class="p"><!----></div>
+The aim of this document is to illustrate graphically some of the striking
+properties of <b>complex analytic functions</b> (also known as <b>holomorphic functions</b>).
+Anyone can enjoy the pictures, of course,
+but to appreciate their meaning you need to know some complex analysis.
+
+<div class="p"><!----></div>
+A function <i>f</i> : <i>R</i> &#8594; <i>R</i> is usually visualized by
+drawing its graph <i>y</i> = <i>f</i> ( <i>x</i> ) in a coordinate system
+with one axis for the domain variable <i>x</i> and one axis for the range variable <i>y</i>.
+However, for complex functions <i>f</i> : <i>C</i> &#8594; <i>C</i>
+we run into trouble;
+since the complex plane <i>C</i> is two-dimensional,
+we would need a four-dimensional space to draw the
+graph <i>w</i> = <i>f</i> ( <i>z</i> ).
+And since four dimensions are one too many for most ordinary mortals,
+other techniques of visualization are called for.
+
+<div class="p"><!----></div>
+The most common method is to draw two copies of the complex
+plane, one for <i>z</i> and one for <i>w</i>, and then in the <i>w</i> plane draw the
+images under <i>f</i> of various curves and regions in the <i>z</i> plane.
+This is very useful, but it can be difficult to capture in a single picture
+what the function f really does.
+This drawback can be at least partly overcome by a simple technique known as
+<b>domain coloring</b>
+(a term coined by professor Frank Farris).
+It works as follows:
+
+<ol type="1">
+<li> "Paint" the <i>w</i> plane, either by copying a picture of something onto it,
+  or by using some formula to determine the color of each point.
+<div class="p"><!----></div>
+</li>
+
+<li> Color every point <i>z</i> in the domain of <i>f</i> with the color of the corresponding point <i>w</i> = <i>f</i> ( <i>z</i> ).
+<div class="p"><!----></div>
+</li>
+</ol>
+The resulting colored picture in the <i>z</i> plane is the "graph" of the function <i>f</i>.
+This method is obviously very well suited for computer graphics.
+
+<div class="p"><!----></div>
+Although domain coloring can be used to draw pictures of arbitrary
+functions <i>f</i> : <i>C</i> &#8594; <i>C</i> (or <i>R</i><sup>2</sup> &#8594; <i>R</i><sup>2</sup> ), I have only considered
+analytic functions here, since they have some very interesting
+properties which are clearly visible in the pictures. Here are some of
+the things that will be illustrated:
+
+<ul>
+<li> Behaviour near zeros, poles, branch cuts and essential singularities.
+<div class="p"><!----></div>
+</li>
+
+<li> Conformality (preservation of angles).
+<div class="p"><!----></div>
+</li>
+
+<li> Lucas' theorem on the critical points of a polynomial.
+<div class="p"><!----></div>
+</li>
+
+<li> Möbius transformations.
+<div class="p"><!----></div>
+</li>
+
+<li> Some common elementary functions.
+<div class="p"><!----></div>
+</li>
+
+<li> The argument principle.
+<div class="p"><!----></div>
+</li>
+
+<li> The maximum principle.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+omain coloring - a simple example
+Let us take a closer look at how domain coloring works,
+by considering an example: the squaring function <i>f</i> ( <i>z</i> )=<i>z</i><sup>2</sup>.
+The first thing to do is to choose a coloring of the <i>w</i> plane.
+For the sake of example, our first coloring will be very simple:
+let the point <i>w</i>=4 be red, the point <i>w</i>=&#8722;1 blue, the point <i>w</i>=0 green,
+and the rest of the <i>w</i> plane white
+(see figure <a href="#fig:simplew">1</a>, where the axes are shown for reference only; they don't belong to the coloring).
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg1">
+</a>   
+<center>    <center>Figure 1: <a name="fig:simplew">
+</a>A simple coloring of the <i>w</i> plane</center>    
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/simple_w.jpg">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+Now for each point in the <i>z</i> plane we determine its color by
+computing <i>w</i>=<i>f</i> ( <i>z</i> )=<i>z</i><sup>2</sup> and looking at what color that point has in our
+colored <i>w</i> plane.
+For example, <i>z</i>=3 will be white,
+since <i>f</i> ( 3 )=3<sup>2</sup>=9 and <i>w</i>=9 is in the white region of the <i>w</i> plane.
+Obviously, with the coloring we have chosen, nearly every <i>z</i> will be white.
+The only points that will <em>not</em> be white are
+
+<ul>
+<li> <i>z</i>=± 2 which will be red, since <i>w</i>=<i>f</i> ( ± 2 )=2<sup>2</sup>=4 is red,
+<div class="p"><!----></div>
+</li>
+
+<li> <i>z</i>=± <i>i</i> which will be blue, since <i>w</i>=<i>f</i> ( ± <i>i</i> )=<i>i</i><sup>2</sup>=&#8722;1 is blue,
+<div class="p"><!----></div>
+</li>
+
+<li> <i>z</i>=0 which will be green, since <i>w</i>=<i>f</i> ( 0 )=0<sup>2</sup>=0 is green.
+<div class="p"><!----></div>
+</li>
+</ul>
+Consequently, we obtain the picture shown in figure <a href="#fig:simplez">2</a>.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg2">
+</a>   
+<center>    <center>Figure 2: <a name="fig:simplez">
+</a>The corresponding simple picture of <i>f</i> ( <i>z</i> )=<i>z</i><sup>2</sup>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/simple_z.jpg">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+Note that the set of red points in the <i>z</i> plane constitutes the inverse image (under the mapping <i>f</i>)
+of the set of red points
+in the <i>w</i> plane, and similarly for the other colors.
+<b>So instead of looking in the <i>w</i> plane at images of <i>z</i> points, as in the conventional technique,
+we are looking in the <i>z</i> plane at <em>inverse</em> images of <i>w</i> points.</b>
+This has the advantage of giving a clear picture also of functions which are not one-to-one.
+By using many colors, we can look at the inverse images of many points
+(in principle, all of them) simultaneously.
+
+<div class="p"><!----></div>
+Before we proceed,
+let me also point out that if <i>f</i> is the identity function, <i>f</i> ( <i>z</i> )=<i>z</i>,
+then the picture in the <i>z</i> plane will of course look exactly like the
+coloring chosen in the <i>w</i> plane.
+
+<div class="p"><!----></div>
+hoosing the coloring
+
+<div class="p"><!----></div>
+The coloring of figure <a href="#fig:simplew">1</a> is of course too simple to be useful;
+the only things that can be read off about the function <i>f</i> ( <i>z</i> )=<i>z</i><sup>2</sup>
+from figure <a href="#fig:simplez">2</a>
+is where the values 4, &#8722;1, and 0 are assumed.
+All other information about <i>f</i> is lost in the great white void.
+
+<div class="p"><!----></div>
+Let us try to find some better way of coloring the <i>w</i> plane.
+Obviously it is desirable that different points be easily distinguishable; 
+looking at a point in the <i>z</i> plane,
+it should be easy to find the corresponding point in the <i>w</i> plane,
+so that we quickly can identify the value of <i>f</i> ( <i>z</i> ).
+This is perhaps most easily accomplished by superimposing
+an actual picture on the <i>w</i> plane, since the brain easily identifies
+features in a picture even if it's heavily distorted.
+An example of this is shown in figure <a href="#fig:face">3</a>, which shows a picture of me
+superimposed on a part of the <i>w</i> plane,
+and the corresponding picture of <i>f</i> ( <i>z</i> )=<i>z</i><sup>2</sup> in the <i>z</i> plane.
+The real and imaginary axes and the square with corners ± 1 ± <i>i</i> are shown for reference
+(the scale is not the same in the two pictures).
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg3">
+</a>   
+<center>    <center>Figure 3: <a name="fig:face">
+</a>It's hip to be squared.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/hans.jpg">
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/hans_squared.jpg">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+Let's look at a few of the properties of the function <i>f</i> ( <i>z</i> )=<i>z</i><sup>2</sup> visible in this figure.
+At <i>z</i>=<i>i</i> we easily recognize the spot on my right ear
+which represents the point <i>w</i>=&#8722;1.
+The same spot is found at <i>z</i>=&#8722;<i>i</i>.
+This reflects the fact that <i>f</i> ( <i>i</i> )=<i>f</i> ( &#8722;<i>i</i> )=&#8722;1.
+Similarly, 
+my mouth, which represents the region near <i>w</i>=&#8722;<i>i</i>,
+is found near the two square roots of &#8722;<i>i</i>,
+which are <i>z</i>=± ( 1 &#8722; <i>i</i> ) / &#8730;2.
+In fact, every part of my face is found at two places in the <i>z</i> plane,
+except for the spot between my eyes corresponding to <i>w</i>=0,
+which occurs only at <i>z</i>=0.
+The region near that point is "blown up" into the bright blob near <i>z</i>=0.
+This shows that the value of <i>f</i> ( <i>z</i> ) changes relatively slowly as we move around near <i>z</i>=0,
+which in turn illustrates that the derivative <i>f</i> &#8242;( <i>z</i> ) = 2 <i>z</i> is small when <i>z</i> is small.
+
+<div class="p"><!----></div>
+Another approach is to color the <i>w</i> plane according to some mathematical formula.
+It is probably impossible to find The Perfect Coloring,
+so depending on what aspect of <i>f</i> one wants to study,
+different colorings have to be used.
+Several variants have been suggested
+(see the references on <a href="http://www.mai.liu.se/%7Ehanlu09/complex/">the start page</a>).
+The coloring scheme that I have chosen to use here is built up as follows
+(figure <a href="#fig:coloring">4</a>):
+
+<ol type="1">
+<li> Choose some color gradient (a smooth sequence of colors) and lay it out "angularly" around <i>w</i>=0.
+  This lets us identify the argument (angle) arg <i>w</i> by the color.
+  I have chosen a discontinuous coloring
+  which makes it easy to find the positive real axis,
+  and in particular to find the point <i>w</i>=0.
+<div class="p"><!----></div>
+</li>
+
+<li> To keep track of the absolute value | <i>w</i> |,
+  make a gray-scale mask with brightness (from 0 to 1, with 0 = black) equal to the fractional part of log<sub>2</sub> | <i>w</i> | .
+  This will make it fairly easy to see the direction of growth of | <i>f</i> ( <i>z</i> ) |
+  (from dark to bright within each ring, the absolute value doubles for each ring).
+  However, the precise value of | <i>f</i> ( <i>z</i> ) | cannot be seen without some further reference point.
+  The logarithmic scale counterbalances blow-up effects near multiple zeros.
+  It also puts zeros and poles on an equal footing,
+  as we will see below.
+<div class="p"><!----></div>
+</li>
+
+<li> Blend the two, possibly together with a picture covering some part of the <i>w</i> plane
+  (for example a picture of a grid, for extra reference).
+<div class="p"><!----></div>
+</li>
+</ol>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg4">
+</a>   
+<center>    <center>Figure 4: <a name="fig:coloring">
+</a>The coloring scheme used below.
+      Colors keep track of arg <i>w</i>, and shades keep track of | <i>w</i> |.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/scheme_arg.jpg">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/scheme_abs.jpg">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/scheme_blend.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+A few words on drawing grids. The first thing that comes to mind is probably something like this:
+color <i>z</i> black if either the real or the imaginary part of <i>f</i> ( <i>z</i> ) is within some fixed tolerance
+from an integer, otherwise color <i>z</i> white.
+This is more or less the same thing as using a picture of a grid superimposed on the <i>w</i> plane,
+just as I used my face in figure <a href="#fig:face">3</a>.
+The result is the first image in figure <a href="#fig:grids">5</a>,
+which obviously isn't very pretty.
+The black blob occurs because that grid point happens to be a critical point
+of the function (i.e., the derivative is zero).
+Conversely, where the function grows quickly, the grid lines become very thin.
+A better picture is obtained by interpolating from black to white using gray-scales,
+as in the second image.
+We still have a black blob, but it looks quite nice,
+and it can even be helpful if we want to spot critical points easily.
+
+<div class="p"><!----></div>
+In case we want all grid lines to be of equal thickness,
+the easiest thing is to draw a checkerboard pattern (third image) and run it through an
+edge detection filter (fourth image).
+
+<div class="p"><!----></div>
+In this document, I have used both interpolated and edge-detected grids.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg5">
+</a>   
+<center>    <center>Figure 5: <a name="fig:grids">
+</a>Grids: plain, interpolated, checkerboard, edge-detected. <i>f</i> ( <i>z</i> ) = <i>z</i><sup>2</sup>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/grid1.png" border="1">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/grid2.png" border="1">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/grid3.png" border="1">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/grid4.png" border="1">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+ase studies of analytic functions
+
+<div class="p"><!----></div>
+Now we begin our little graphical journey through complex analysis.
+Let's recall some basic facts first.
+The word <em>analytic</em> means <em>expandable in a convergent power series</em>,
+which in the complex case turns out to hold for all differentiable functions.
+So an analytic function has a power series expansion around each point <i>z</i><sub>0</sub> :
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table align="center" cellpadding="2" cellspacing="0"><tbody><tr><td align="center" nowrap="nowrap">
+ <i>f</i> ( <i>z</i> ) = <i>f</i> ( <i>z</i><sub>0</sub> ) + <i>f</i> &#8242;( <i>z</i><sub>0</sub> ) ( <i>z</i> &#8722; <i>z</i><sub>0</sub> ) + </td><td align="center" nowrap="nowrap">
+1
+<div class="hrcomp"><hr noshade="noshade" size="1"></div>2!<br></td><td align="center" nowrap="nowrap">
+<i>f</i> &#8242;&#8242;( <i>z</i><sub>0</sub> ) ( <i>z</i> &#8722; <i>z</i><sub>0</sub> )<sup>2</sup> + …</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+Assume that <i>z</i><sub>0</sub> is a zero of <i>f</i>, so that the first term in the power series vanishes.
+Then we have, for <i>z</i> near <i>z</i><sub>0</sub>,
+
+<ul>
+<li> <i>f</i> ( <i>z</i> )  &#8776; <i>f</i> &#8242;( <i>z</i><sub>0</sub> ) ( <i>z</i> &#8722; <i>z</i><sub>0</sub> ), if <i>z</i><sub>0</sub> is a simple zero,
+<div class="p"><!----></div>
+</li>
+
+<li> <i>f</i> ( <i>z</i> )  &#8776; [1/2!] <i>f</i> &#8242;&#8242;( <i>z</i><sub>0</sub> ) ( <i>z</i> &#8722; <i>z</i><sub>0</sub> )<sup>2</sup> , if <i>z</i><sub>0</sub> is a double zero,
+<div class="p"><!----></div>
+</li>
+
+<li> <i>f</i> ( <i>z</i> )  &#8776; [1/3!] <i>f</i> &#8242;&#8242;&#8242;( <i>z</i><sub>0</sub> ) ( <i>z</i> &#8722; <i>z</i><sub>0</sub> )<sup>3</sup> , if <i>z</i><sub>0</sub> is a triple zero, etc.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+Consequently, near a zero <i>z</i><sub>0</sub> of order <i>k</i>,
+<i>f</i> looks very similar to what the monomial <i>z</i><sup><i>k</i></sup>
+(multiplied by some constant)
+looks like near <i>z</i>=0.
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.1">
+0.1</a>&nbsp;&nbsp;Monomials</h3>
+
+<div class="p"><!----></div>
+Figure <a href="#fig:monomials">6</a> shows the first few <i>z</i><sup><i>k</i></sup>.
+Recall that complex powers are most easily understood in polar form:
+if <i>z</i> = <i>R</i> <i>e</i><sup> <i>i</i> &#966;</sup>, then <i>z</i><sup><i>k</i></sup> = <i>R</i><sup><i>k</i></sup> <i>e</i><sup> <i>i</i> <i>k</i> &#966;</sup>.
+Try to understand how this can be seen in the pictures!
+Also, compare the first two pictures (<i>k</i>=1 and 2) with figure <a href="#fig:face">3</a>,
+which shows essentially the same thing with a different coloring (my face).
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg6">
+</a>   
+<center>    <center>Figure 6: <a name="fig:monomials">
+</a>The monomials <i>f</i> ( <i>z</i> )=<i>z</i><sup><i>k</i></sup> for <i>k</i>=1, 2, 3, 4,
+      drawn on the square with corners ± 2 ± 2 <i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/mono1.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/mono2.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/mono3.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/mono4.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+How are the pictures affected if we multiply by a complex constant?
+Figure <a href="#fig:rotated">7</a> shows the function <i>f</i> (<i>z</i>)=<i>i</i> <i>z</i>.
+As you can see, it looks just like <i>f</i> ( <i>z</i> )=<i>z</i>, but rotated &#8722;&#960; / 2
+(that is, 90 degrees <em>clockwise</em>; note the minus sign).
+This is because multiplication by <i>i</i> rotates by arg <i>i</i> = +&#960; / 2
+and we are looking at <em>inverse</em> images;
+the points on the negative imaginary axis are mapped by <i>f</i> to the positive real axis (rotation +&#960; / 2),
+so the yellow-black border representing the positive real axis ends up on the negative
+imaginary axis in the picture (rotation &#8722;&#960; / 2).
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg7">
+</a>   
+<center>    <center>Figure 7: <a name="fig:rotated">
+</a>The function <i>f</i> ( <i>z</i> )=<i>i</i> <i>z</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/mono1_rot.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+Two small exercises:
+
+<ul>
+<li> What does <i>f</i> ( <i>z</i> )=<i>c</i> <i>z</i> look like, where <i>c</i> is a complex constant?
+<div class="p"><!----></div>
+</li>
+
+<li> And <i>f</i> ( <i>z</i> ) = <i>i</i> <i>z</i><sup>2</sup> ? (Caution: the angle of rotation is <em>not</em> 90 degrees!)
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+An important thing that we learn from this section is this.
+<b>Since <i>f</i> looks like a monomial near its zeros, 
+a zero <i>z</i><sub>0</sub> of order <i>k</i> can be recognized (with the coloring used here)
+by the following features:</b>
+
+<ul>
+<li> The shaded rings accumulate around <i>z</i><sub>0</sub> .
+<div class="p"><!----></div>
+</li>
+
+<li> If we go in a small circle around <i>z</i><sub>0</sub>, the colors cycle <i>k</i> times.
+  In particular, we cross <i>k</i> times <b>from yellow to black</b> if we go counterclockwise.
+  (This is our first encounter with <em>the argument principle</em>.)
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.2">
+0.2</a>&nbsp;&nbsp;A fourth degree polynomial</h3>
+
+<div class="p"><!----></div>
+Let us try all this on a polynomial.
+Figure <a href="#fig:degreefour">8</a> shows the fourth degree polynomial
+<i>f</i> ( <i>z</i> ) = ( <i>z</i> + 2 )<sup>2</sup> ( <i>z</i> &#8722; 1 &#8722; 2<i>i</i> ) ( <i>z</i> + <i>i</i> ).
+The zeros are clearly visible as the endpoints of the yellow-black borders representing the positive real axis,
+and as the points around which the shaded rings of absolute value accumulate.
+There are <em>two</em> yellow-black "spokes" originating from the <em>double</em> zero at <i>z</i> = &#8722;2
+and <em>one</em> from each of the <em>simple</em> zeros at <i>z</i> = 1 + 2<i>i</i> and <i>z</i> = &#8722;<i>i</i>.
+There are also red spokes, not as sharp, which correspond to (the region near) the negative real axis.
+A small enough square around one of the zeros looks,
+when magnified, like a rotated version of the pictures of <i>z</i><sup>2</sup> or <i>z</i>,
+respectively, from figure <a href="#fig:monomials">6</a>.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg8">
+</a>   
+<center>    <center>Figure 8: <a name="fig:degreefour">
+</a>The polynomial <i>f</i> ( <i>z</i> ) = ( <i>z</i> + 2 )<sup>2</sup> ( <i>z</i> &#8722; 1 &#8722; 2<i>i</i> ) ( <i>z</i> + <i>i</i> ),
+      drawn on the square with corners ± 3 ± 3 <i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/poly1a.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+Figure <a href="#fig:degreefour2">9</a> shows the same polynomial,
+but with the grid more clearly visible.
+This picture illustrates another important feature of analytic functions;
+they are <b>conformal</b>,
+which means that <b>angles are preserved</b>.
+More precisely, if two curves intersect at an angle &#945; at the point <i>z</i><sub>0</sub>,
+then their images under <i>f</i> intersect at the same angle &#945; at the point <i>f</i> ( <i>z</i><sub>0</sub> ).
+This is because the tangents of the curves are both rotated by the same angle, namely arg <i>f</i> &#8242;( <i>z</i><sub>0</sub> ).
+In the picture the phenomenon manifests itself in the reverse direction;
+the grid curves intersect orthogonally in the <i>w</i> plane,
+so their inverse images that we see in the <i>z</i> plane do likewise.
+
+<div class="p"><!----></div>
+<b>Conformality breaks down</b> at points where the derivative <i>f</i> &#8242; is zero
+(so-called <b>critical points</b> of <i>f</i> ).
+Can you find the three points in the picture where something strange seems to happen to the angles?
+Those are the three zeros of <i>f</i> &#8242; (which is a third degree polynomial in this case).
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg9">
+</a>   
+<center>    <center>Figure 9: <a name="fig:degreefour2">
+</a>The grid represents the square in the <i>w</i> plane with corners ± 20 ± 20<i>i</i>,
+      each square in the grid having side length 2.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/poly1b.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+There is a nice little theorem, known as <b>Lucas' theorem</b>, which states the following:
+if <i>f</i> is a polynomial, then the zeros of <i>f</i> &#8242; all lie in the convex hull of the set of zeros of <i>f</i>.
+Figure <a href="#fig:lucas">10</a> verifies that this indeed holds in this particular case.
+(The <b>convex hull</b> of a set <i>M</i> is the smallest convex set containing <i>M</i> ;
+"a rubber band stretched around <i>M</i> forms the boundary of the convex hull".)
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg10">
+</a>   
+<center>    <center>Figure 10: <a name="fig:lucas">
+</a>Lucas' theorem.
+      The triangle is the convex hull of the zeros of <i>f</i>.
+      The three bright spots are the zeros of the derivative <i>f</i> &#8242;.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/poly1c.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.3">
+0.3</a>&nbsp;&nbsp;Rational functions</h3>
+
+<div class="p"><!----></div>
+Now to rational functions (quotients of polynomials).
+As well as zeros, there are now also <em>poles</em> - singularities because of zeros in the denominator.
+Poles (figure <a href="#fig:poles">11</a>) look rather similar to zeros (figure <a href="#fig:monomials">6</a>), but:
+
+<ul>
+<li> The colors cycle in the opposite direction
+  (we cross <b>from black to yellow</b> if we go counterclockwise).
+<div class="p"><!----></div>
+</li>
+
+<li> The absolute value grows to infinity as we approach the pole
+  (instead of vanishing, as it does for a zero).
+<div class="p"><!----></div>
+</li>
+</ul>
+Of course, with a different coloring, zeros and poles need not look alike at all!
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg11">
+</a>   
+<center>    <center>Figure 11: <a name="fig:poles">
+</a>The functions 1 / <i>z</i> and 1 / <i>z</i><sup>2</sup>, with a simple and a double pole,
+      respectively, at <i>z</i>=0.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/pole1.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/pole2.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+<b>Möbius transformations</b>, also known as a <b>linear fractional transformations</b>,
+are rational functions of the form
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table align="center" cellpadding="2" cellspacing="0"><tbody><tr><td align="center" nowrap="nowrap">
+ <i>f</i> ( <i>z</i> ) = </td><td align="center" nowrap="nowrap">
+<i>a</i> <i>z</i> + <i>b</i>
+<div class="hrcomp"><hr noshade="noshade" size="1"></div><i>c</i> <i>z</i> + <i>d</i><br></td><td align="center" nowrap="nowrap">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( <i>ad</i> &#8722; <i>bc</i>  &#8800; 0 ).</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+They have lots of interesting properties,
+such as mapping circles to circles
+(if we consider straight lines as circles of infinite radius).
+Domain coloring perhaps doesn't do justice to all their properties,
+but let's look at a few things that can be seen.
+Figure <a href="#fig:moebius">12</a> shows <i>f</i> ( <i>z</i> ) = ( <i>z</i>&#8722;1 ) / ( <i>z</i>+1 ).
+There is a simple zero at <i>z</i>=1 and a simple pole <i>z</i>=&#8722;1.
+The real axis is mapped to the real axis, since <i>a</i>, <i>b</i>, <i>c</i>, <i>d</i> are all real in this case.
+The imaginary axis is mapped to the unit circle,
+since
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table align="center" cellpadding="2" cellspacing="0"><tbody><tr><td align="center" nowrap="nowrap">
+ | <i>f</i> ( <i>z</i> ) | = </td><td align="center" nowrap="nowrap">
+| <i>z</i>&#8722;1 |
+<div class="hrcomp"><hr noshade="noshade" size="1"></div>| <i>z</i>+1 |<br></td><td align="center" nowrap="nowrap">
+ = </td><td align="center" nowrap="nowrap">
+<span class="roman">distance</span> <span class="roman">from</span>&nbsp; <i>z</i> &nbsp;<span class="roman">to</span>&nbsp;1
+<div class="hrcomp"><hr noshade="noshade" size="1"></div><span class="roman">distance</span> <span class="roman">from</span>&nbsp; <i>z</i> &nbsp;<span class="roman">to</span>&nbsp;&#8722;1<br></td><td align="center" nowrap="nowrap">
+,</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+and the points <i>z</i> for which these two distances are equal are those on the imaginary axis.
+By continuity, the right half plane is mapped to the interior of the unit circle.
+Circles containing the point &#8722;1 are mapped to circles containing <i>f</i> ( &#8722;1 ) = &#8734;
+(i.e., to straight lines),
+as the grid illustrates.
+For example, the unit circle is mapped to the imaginary axis.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg12">
+</a>   
+<center>    <center>Figure 12: <a name="fig:moebius">
+</a>The Möbius transformation <i>f</i> ( <i>z</i> ) = ( <i>z</i>&#8722;1 ) / ( <i>z</i>+1 ).
+      Corners at ± 2 ± 2 <i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/moebius.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+Another rational function of some importance is
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table align="center" cellpadding="2" cellspacing="0"><tbody><tr><td align="center" nowrap="nowrap">
+ <i>f</i> ( <i>z</i> ) = <i>z</i> + </td><td align="center" nowrap="nowrap">
+1
+<div class="hrcomp"><hr noshade="noshade" size="1"></div><i>z</i><br></td><td align="center" nowrap="nowrap">
+ = </td><td align="center" nowrap="nowrap">
+<i>z</i><sup>2</sup> + 1
+<div class="hrcomp"><hr noshade="noshade" size="1"></div><i>z</i><br></td><td align="center" nowrap="nowrap">
+,</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+which is shown in figure <a href="#fig:zplus1z">13</a>.
+There are simple zeros at <i>z</i>=± <i>i</i> and a simple pole at <i>z</i>=0.
+The critical points are at <i>z</i>=± 1.
+The real and imaginary axes are mapped to themselves,
+as are the right and left half planes.
+It is also clearly visible that the unit circle is mapped to the real axis;
+in fact, <i>f</i> ( <i>e</i><sup> <i>i</i>&#966;</sup> ) = <i>e</i><sup> <i>i</i>&#966;</sup> + <i>e</i><sup>&#8722;<i>i</i>&#966;</sup> = 2 cos &#966;,
+by Euler's formula.
+Far from the origin, the influence of the term 1/<i>z</i> is small,
+so that <i>f</i> ( <i>z</i> )  &#8776; <i>z</i> (as suggested by the grid).
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg13">
+</a>   
+<center>    <center>Figure 13: <a name="fig:zplus1z">
+</a>The rational function <i>f</i> ( <i>z</i> ) = <i>z</i> + 1/<i>z</i>.
+      Corners at ± 4 ± 4 <i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/rational.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.4">
+0.4</a>&nbsp;&nbsp;The argument principle</h3>
+
+<div class="p"><!----></div>
+Figure <a href="#fig:rat">14</a> shows a rational function with two simple zeros, one double zero, and one triple pole.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg14">
+</a>   
+<center>    <center>Figure 14: <a name="fig:rat">
+</a>The function <i>f</i> ( <i>z</i> ) = ( <i>z</i> &#8722; 2 )<sup>2</sup> ( <i>z</i> + 1 &#8722; 2<i>i</i> ) ( <i>z</i> + 2 + 2<i>i</i> ) / <i>z</i><sup>3</sup>.
+      Corners at ± 3 ± 3 <i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/arg_princ1.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+I will use this to function to illustrate the <b>argument principle</b>:
+
+<blockquote>
+  Suppose <i>f</i> is analytic (poles are also allowed).
+  Let &#947; be a simple closed curve
+  which does not pass through any zero or pole of <i>f</i>.
+  Let <i>N</i> (and <i>P</i>) be the number of zeros (poles) of <i>f</i> inside &#947;,
+  counted with multiplicity.
+  Then,
+  as <i>z</i> goes one lap counterclockwise around &#947;,
+  the image curve <i>f</i> ( &#947; ) winds
+  <i>N</i> &#8722; <i>P</i> times around <i>w</i> = 0.
+</blockquote>
+With our use of colors to keep track of arg <i>f</i> ( <i>z</i> ),
+this is the same as saying that
+<b>the colors sweep through the color gradient <i>N</i> &#8722; <i>P</i> times as we move around &#947;</b>.
+Counting sweeps (from black through red to yellow) is especially easy with our discontinuous coloring:
+jumping from yellow to black adds one,
+and jumping from black to yellow subtracts one (since then we are sweeping backwards).
+
+<div class="p"><!----></div>
+In figure <a href="#fig:arg">15</a> there are two curves which illustrate this.
+(You can make up your own curves and try them on any function in this document.)
+The upper curve encircles the double zero and one simple zero,
+so <i>N</i> &#8722; <i>P</i> = (2+1) &#8722; 0 = 3,
+and the number of yellow-to-black crossings is also three.
+The lower curve encircles the other simple zero and the triple pole,
+so <i>N</i> &#8722; <i>P</i> = 1 &#8722; 3 = &#8722;2,
+which is OK with the picture since black-to-yellow crossings count as negative.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg15">
+</a>   
+<center>    <center>Figure 15: <a name="fig:arg">
+</a>The argument principle. Within each curve, the black numbers have the same sum as the blue numbers.</center>
+    
+    
+    
+    
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/arg_princ2.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.5">
+0.5</a>&nbsp;&nbsp;The exponential and the logarithm</h3>
+
+<div class="p"><!----></div>
+The rather boring first image in figure <a href="#fig:exp">16</a> shows the exponential function
+<i>f</i> ( <i>z</i> ) = <i>e</i><sup><i>z</i></sup> = <i>e</i><sup><i>x</i></sup> ( cos <i>y</i> + <i>i</i> sin <i>y</i> ).
+The period 2&#960; <i>i</i> is clearly visible,
+as well as the exponential growth of absolute value from left to right;
+recall that | <i>f</i> | doubles for each shaded band,
+so that at the left edge it is very small (<i>e</i><sup>&#8722;10</sup> )
+and at the right edge it is very large (<i>e</i><sup>10</sup> ).
+
+<div class="p"><!----></div>
+Since the exponential is periodic, it is many-to-one.
+Consequently, it is not invertible,
+but its restriction to (for example) the strip &#8722;&#960; &lt;  <i>y</i>  &#8804; &#960; is.
+The inverse of that particular restriction is called the <b>principal branch</b> of the logarithm,
+and is shown in the second image.
+Note the discontinuity at the <b>branch cut</b> along the negative real axis (colored blue).
+The singular point <i>z</i>=0 is called a (logarithmic) <b>branch point</b>.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg16">
+</a>   
+<center>    <center>Figure 16: <a name="fig:exp">
+</a>The exponential <i>f</i> ( <i>z</i> ) = <i>e</i><sup><i>z</i></sup> (corners at ± 10 ± 10<i>i</i> )
+      and the logarithm <i>f</i> ( <i>z</i> ) = log <i>z</i> (corners at ± 3 ± 3<i>i</i> ).</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/exp.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/log.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.6">
+0.6</a>&nbsp;&nbsp;Trigonometric functions</h3>
+
+<div class="p"><!----></div>
+The trigonometric functions are defined for complex arguments through Euler's formulas
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table align="center" cellpadding="2" cellspacing="0"><tbody><tr><td align="center" nowrap="nowrap">
+ cos <i>z</i> = </td><td align="center" nowrap="nowrap">
+<i>e</i><sup><i>iz</i></sup> + <i>e</i><sup>&#8722;<i>iz</i></sup>
+<div class="hrcomp"><hr noshade="noshade" size="1"></div>2<br></td><td align="center" nowrap="nowrap">
+, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sin <i>z</i> = </td><td align="center" nowrap="nowrap">
+<i>e</i><sup><i>iz</i></sup> &#8722; <i>e</i><sup>&#8722;<i>iz</i></sup>
+<div class="hrcomp"><hr noshade="noshade" size="1"></div>2<i>i</i><br></td><td align="center" nowrap="nowrap">
+.</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+Figure <a href="#fig:sin">17</a> shows the complex sine function.
+Note the period 2&#960;, the simple zeros at &#960; <i>n</i>,
+and the critical points at &#960; / 2 + &#960; <i>n</i> (<i>n</i> integer).
+Along the real axis we have the familiar sine wave oscillating between &#8722;1 and +1,
+but for complex values the sine function is no longer bounded within those limits.
+In fact,  according to the formula
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table align="center" cellpadding="2" cellspacing="0"><tbody><tr><td align="center" nowrap="nowrap">
+ | sin <i>z</i> |<sup>2</sup> = sin<sup>2</sup> <i>x</i> + sinh<sup>2</sup> <i>y</i></td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+it goes off exponentially in the vertical directions,
+as is clearly visible in the picture.
+
+<div class="p"><!----></div>
+Exercise: Find the points where sin <i>z</i> = 2.
+
+<div class="p"><!----></div>
+(Hints: <i>w</i> = 2 is on the positive real axis,
+hence the points we are looking for must lie on some yellow-black border.
+We have sin <i>z</i> = 1 at <i>z</i> = &#960; / 2 + 2&#960; <i>n</i> (the yellow-black crossings),
+and the absolute value doubles for each shaded band that we pass from dark to bright.
+The grid might also be helpful.)
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg17">
+</a>   
+<center>    <center>Figure 17: <a name="fig:sin">
+</a>Three views of the complex sine function <i>f</i> ( <i>z</i> ) = sin <i>z</i>.
+      Corners at ± 10 ± 10<i>i</i> and ± &#960; ± &#960;<i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/sin1.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/sin2.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/sin3.png">
+    
+    
+    </center>
+
+<div class="p"><!----></div>
+The semi-infinite strip &#8722;&#960; / 2  &lt;  <i>x</i>  &lt;  &#960; / 2, <i>y</i>  &gt;  0 (marked with blue in the third picture)
+is mapped to the upper half plane -
+I hope you can visualize how the grid can be restored by
+bending the two vertical half-lines <i>x</i> = ± &#960; / 2, <i>y</i>  &gt;  0 down to the real axis
+and stretching the region between them accordingly.
+By left-right translation and by reflection in the real axis
+we obtain similar strips;
+where are these strips sent by the sine function?
+(If you know about Riemann surfaces, use this to figure out what the Riemann surface for arcsin <i>z</i> looks like.)
+
+<div class="p"><!----></div>
+Pictures of the cosine function would look exactly the same except for a translation,
+since cos <i>z</i> = sin ( <i>z</i> + &#960; / 2 ).
+
+<div class="p"><!----></div>
+Figure <a href="#fig:tan">18</a> shows two images of the complex tangent function tan <i>z</i> = sin <i>z</i> / cos <i>z</i>,
+with period &#960;.
+The first picture shows argument and absolute value as usual.
+The second one shows argument together with a grid of unit side length,
+the region colored blue being mapped into the square with corners 0, 1, <i>i</i>, 1+<i>i</i>.
+
+<div class="p"><!----></div>
+For tan <i>z</i> all the action takes place near the real axis,
+with simple zeros at &#960;<i>n</i> and
+simple poles at &#960; / 2 + &#960; <i>n</i>.
+Some distance away from the real axis, the function is nearly constant
+(+<i>i</i> in the upper half plane, &#8722;<i>i</i> in the lower half plane):
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table align="center" cellpadding="2" cellspacing="0"><tbody><tr><td align="center" nowrap="nowrap">
+ tan ( <i>x</i> + <i>i</i> <i>y</i> ) = </td><td align="center" nowrap="nowrap">
+tan <i>x</i> + <i>i</i> tanh <i>y</i>
+<div class="hrcomp"><hr noshade="noshade" size="1"></div>1 &#8722; <i>i</i> tan <i>x</i> tanh <i>y</i><br></td><td align="center" nowrap="nowrap">
+&#8594; </td><td align="center" nowrap="nowrap">
+tan <i>x</i> ± <i>i</i>
+<div class="hrcomp"><hr noshade="noshade" size="1"></div>1 &#8722; (± <i>i</i> tan <i>x</i> )<br></td><td align="center" nowrap="nowrap">
+ = ± <i>i</i>, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>y</i> &#8594; ± &#8734;.</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+The lines <i>x</i> = &#960; / 4 and <i>x</i> = &#8722;&#960; / 4 are mapped to the
+right and left part of the unit circle, respectively.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg18">
+</a>   
+<center>    <center>Figure 18: <a name="fig:tan">
+</a>Complex tangent function <i>f</i> ( <i>z</i> ) = tan <i>z</i>.
+      Corners at ± &#960; ± &#960; <i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/tan1.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/tan2.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.7">
+0.7</a>&nbsp;&nbsp;Essential singularities</h3>
+
+<div class="p"><!----></div>
+If <i>f</i> ( <i>z</i> ) is known to be analytic in some disc (the interior of a circle) <i>D</i>,
+except maybe at the center <i>z</i><sub>0</sub>,
+then there are three possible cases:
+
+<ol type="1">
+<li> <i>f</i> ( <i>z</i> ) is bounded near <i>z</i><sub>0</sub>, in which case it is actually analytic there, and hence in all of <i>D</i>.
+  (Riemann's removable singularities theorem.)
+<div class="p"><!----></div>
+</li>
+
+<li> <i>f</i> ( <i>z</i> ) is unbounded near <i>z</i><sub>0</sub>, but ( <i>z</i> &#8722; <i>z</i><sub>0</sub> )<sup><i>k</i></sup> <i>f</i> ( <i>z</i> ) is analytic for some <i>k</i>  &gt;  0.
+  Then <i>z</i><sub>0</sub> is called a <b>pole</b> of order <i>k</i>.
+<div class="p"><!----></div>
+</li>
+
+<li> Neither of the above. Then <i>z</i><sub>0</sub> is called an <b>essential singularity</b>.
+<div class="p"><!----></div>
+</li>
+</ol>
+
+<div class="p"><!----></div>
+Figure <a href="#fig:essential">19</a> shows a function with an essential singularity at the origin.
+Clearly, some fairly complicated stuff seems to be going on near the singularity!
+Maybe we could get a better view if we zoomed in a bit?
+No, in fact that wouldn't help much, because of the remarkable <b>Picard's great theorem</b> (there is also a Picard's little theorem):
+
+<blockquote>
+  In any disc with center at the essential singularity <i>z</i><sub>0</sub>,
+  no matter how small,
+  <i>f</i> assumes all (or possibly all but one) complex values.
+</blockquote>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg19">
+</a>   
+<center>    <center>Figure 19: <a name="fig:essential">
+</a><i>f</i> ( <i>z</i> ) = sin ( 1 / <i>z</i> ).
+      Corners at ± 1 ± <i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/sin_one_over_z.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.8">
+0.8</a>&nbsp;&nbsp;The maximum principle</h3>
+
+<div class="p"><!----></div>
+You may have noticed a curious thing about the shading that I use to indicate
+the absolute value of functions:
+if some band forms a closed curve ("a shaded ring"), then there is always at least one zero
+or singularity inside.
+In fact, we recognize zeros and poles as points where shaded rings "gather round".
+
+<div class="p"><!----></div>
+This is a manifestation of <b>the maximum principle</b>, which says (briefly):
+
+<blockquote>
+  If <i>f</i> is analytic, then | <i>f</i> | has no local maxima.
+</blockquote>
+A more precise statement is the following:
+
+<blockquote>
+  Let <i>M</i> be a domain (an open connected set) in the complex plane,
+  and suppose that <i>f</i> is analytic in <i>M</i> (no singularities allowed!).
+  Then | <i>f</i> | has no maximum value in <i>M</i>, except in the trivial case that <i>f</i> is constant.
+</blockquote>
+If <i>f</i> has no zeros in <i>M</i>, then 1/<i>f</i> is analytic in <i>M</i> and has no maximum,
+which implies that | <i>f</i> | has no <em>minimum</em> in <i>M</i> either.
+(But if <i>f</i> has zeros in <i>M</i>, then they are of course minima of | <i>f</i> |.)
+
+<div class="p"><!----></div>
+Another corollary is that if <i>M</i> is bounded,
+and <i>f</i> extends continuously out to the boundary of <i>M</i>,
+then | <i>f</i> | attains its maximum on the boundary
+(and its minimum too, if <i>f</i> has no zeros in <i>M</i>).
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.9">
+0.9</a>&nbsp;&nbsp;The gamma function</h3>
+
+<div class="p"><!----></div>
+I will close this little tour with a look at a less common function, namely the gamma function &#915;,
+which is defined by
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table align="center" cellpadding="2" cellspacing="0"><tbody><tr><td align="center" nowrap="nowrap">
+ &#915;( <i>z</i> ) = </td><td class="cl" align="left">&#8992;<br>&#8993;
+</td><td align="center" nowrap="nowrap">
+<small>&#8734;</small><!--sup
+--><br><br>
+<small>0</small>&nbsp;<br></td><td align="center" nowrap="nowrap">
+<i>t</i><sup> <i>z</i>&#8722;1</sup> <i>e</i><sup>&#8722;<i>t</i></sup> <i>dt</i>.</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+This integral is convergent only for <i>z</i> in the right half plane,
+but the gamma function can be <b>analytically continued</b> to the left half plane as well,
+using the property &#915;( <i>z</i> + 1 ) = <i>z</i> &#915;( <i>z</i> )
+(which is easily proved using integration by parts).
+For example, &#915;( &#8722;0.1 ) is defined to be &#915;( &#8722;0.1 + 1 ) / 0.1 = 10&nbsp;&#915;( 0.9 ),
+where &#915;( 0.9 ) is already defined by the integral above,
+and so on.
+This works fine unless <i>z</i> is zero or a negative integer,
+since then we are eventually forced to divide by zero;
+the gamma function has simple poles at these points.
+
+<div class="p"><!----></div>
+For nonnegative integers <i>n</i> we have &#915;( <i>n</i> + 1 ) = <i>n</i>! ,
+so that the gamma function is a continuous version of <i>n</i>-factorial.
+Another exactly known value is
+&#915;( 0.5 ) = &#8730;{&#960;}.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg20">
+</a>   
+<center>    <center>Figure 20: <a name="fig:gamma">
+</a>The gamma function &#915;( <i>z</i> ).
+      Corners at ± 4 ± 4<i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/gamma.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+teration of functions
+
+<div class="p"><!----></div>
+You may have tried the following on your pocket calculator sometime:
+type in an arbitrary positive number, and then push the "square root" button over and over.
+(This is called <b>iterating</b> the square root function.)
+If you start with a number greater than 1, it will become smaller for each key-press,
+until it is so close to 1 that the calculator thinks that is actually <em>is</em> 1.
+Similarly, if you start with a number between 0 and 1,
+the sequence will approach 1 from below.
+Pushing some other button, for example "cos", leads to less obvious (and more interesting) results.
+Even more interesting things happen when we go into the complex plane and iterate analytic functions.
+The notation <i>f</i><sup>(<i>n</i>)</sup>( <i>z</i> ) is used to denote the <i>n</i>-th iterate of <i>f</i>,
+that is,
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table align="center" cellpadding="2" cellspacing="0"><tbody><tr><td align="center" nowrap="nowrap">
+ <i>f</i><sup>(1)</sup>( <i>z</i> ) = <i>f</i> ( <i>z</i> ), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>f</i><sup>(2)</sup>( <i>z</i> ) = <i>f</i> ( <i>f</i> ( <i>z</i> ) ), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>f</i><sup>(3)</sup>( <i>z</i> ) = <i>f</i> ( <i>f</i> ( <i>f</i> ( <i>z</i> ) ) ),</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+and so on.
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.10">
+0.10</a>&nbsp;&nbsp;Quadratic polynomials</h3>
+
+<div class="p"><!----></div>
+The most well-known case is when <i>f</i> is a quadratic polynomial.
+For example, let <i>f</i> ( <i>z</i> ) = <i>z</i><sup>2</sup> + <i>c</i>, where <i>c</i> = &#8722;0.75 &#8722; 0.2<i>i</i>.
+Figure <a href="#fig:iterates">21</a> shows the first four iterates:
+
+<br clear="all"><table border="0" width="100%"><tbody><tr><td>
+<table border="0" cellpadding="0" cellspacing="0">
+ <tbody><tr><td width="50%"></td><td colspan="1" align="right" nowrap="nowrap"><table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+ </td></tr></tbody></table></td><td align="left" nowrap="nowrap">
+<table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+</td></tr></tbody></table></td><td align="left" nowrap="nowrap">
+<table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+<i>f</i><sup>(1)</sup>( <i>z</i> ) = <i>z</i><sup>2</sup> + <i>c</i> </td></tr></tbody></table></td><td width="50%"></td></tr>
+ <tr><td width="50%"></td><td colspan="1" align="right" nowrap="nowrap"><table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+ </td></tr></tbody></table></td><td align="left" nowrap="nowrap">
+<table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+</td></tr></tbody></table></td><td align="left" nowrap="nowrap">
+<table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+<i>f</i><sup>(2)</sup>( <i>z</i> ) = ( <i>z</i><sup>2</sup> + <i>c</i> )<sup>2</sup> + <i>c</i> = <i>z</i><sup>4</sup> + 2 <i>c</i> <i>z</i><sup>2</sup> + <i>c</i><sup>2</sup> + <i>c</i> </td></tr></tbody></table></td><td width="50%"></td></tr>
+ <tr><td width="50%"></td><td colspan="1" align="right" nowrap="nowrap"><table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+ </td></tr></tbody></table></td><td align="left" nowrap="nowrap">
+<table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+</td></tr></tbody></table></td><td align="left" nowrap="nowrap">
+<table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+<i>f</i><sup>(3)</sup>( <i>z</i> ) = ( <i>z</i><sup>4</sup> + ... )<sup>2</sup> + <i>c</i> = <i>z</i><sup>8</sup> + ... </td></tr></tbody></table></td><td width="50%"></td></tr>
+ <tr><td width="50%"></td><td colspan="1" align="right" nowrap="nowrap"><table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+ </td></tr></tbody></table></td><td align="left" nowrap="nowrap">
+<table border="0" cellpadding="2" cellspacing="0"><tbody><tr><td align="left" nowrap="nowrap">
+</td></tr></tbody></table></td><td align="left" nowrap="nowrap">
+<table><tbody><tr><td colspan="1" align="right" nowrap="nowrap"><i>f</i><sup>(4)</sup>( <i>z</i> ) = ( <i>z</i><sup>8</sup> + ... )<sup>2</sup> + <i>c</i> = <i>z</i><sup>16</sup> + ...</td></tr></tbody></table></td><td width="50%"></td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+The degree doubles at each step, so likewise does the number of zeros.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg21">
+</a>   
+<center>    <center>Figure 21: <a name="fig:iterates">
+</a>The iterates <i>f</i><sup>(<i>n</i>)</sup>( <i>z</i> ) for <i>n</i>=1, 2, 3, 4,
+      where <i>f</i> ( <i>z</i> ) = <i>z</i><sup>2</sup> &#8722; 0.75 &#8722; 0.2<i>i</i>.
+      Corners at ± 2 ± 2 <i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/iterate1a.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/iterate1b.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/iterate1c.png">
+      &nbsp;&nbsp;&nbsp;
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/iterate1d.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+Figure <a href="#fig:twentytimes">22</a> depicts the function obtained by iterating <i>f</i> twenty times.
+This function is a polynomial of degree 2<sup>20</sup>,
+so it has 2<sup>20</sup> = 1048576 zeros!
+About a hundred of them can be distinguished in the picture
+(<a href="http://www.mai.liu.se/%7Ehanlu09/complex/pics/iterate2_big.png">here is a larger picture</a>).
+
+<div class="p"><!----></div>
+The black region is not really supposed to be there -
+it consists of the points where an overflow error occurs
+because the value of the function is too large to represent
+with standard precision floating point arithmetic.
+However,
+for large <i>z</i> the behaviour of the function is dominated by the
+contribution from the leading term <i>z</i><sup>1048576</sup>,
+which is a monomial,
+so by now you should be able to figure out what
+the function will eventually look like if we zoom out enough,
+even if we can't <em>compute</em> it without some special software.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg22">
+</a>   
+<center>    <center>Figure 22: <a name="fig:twentytimes">
+</a>The twentieth iterate <i>f</i><sup>(20)</sup>( <i>z</i> ), where <i>f</i> ( <i>z</i> ) = <i>z</i><sup>2</sup> &#8722; 0.75 &#8722; 0.2<i>i</i>.
+      Corners at ± 1.6 ± 1.1<i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/iterate2.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+What happens when we iterate this polynomial further?
+It is not hard to realize that
+<i>f</i><sup>(<i>n</i>)</sup>( <i>z</i> ) &#8594; &#8734; as <i>n</i> &#8594; &#8734;
+if, for example, | <i>f</i><sup>(<i>k</i>)</sup>( <i>z</i> ) |  &gt;  2 for some <i>k</i>,
+since after that the absolute value will keep increasing.
+This holds of course if <i>z</i> is one of the black overflow points,
+and actually for most other <i>z</i> as well.
+Those <i>z</i> for which <i>f</i><sup>(<i>n</i>)</sup>( <i>z</i> ) does <em>not</em> tend to infinity
+constitute <b>the filled Julia set</b> of <i>f</i>,
+which is shown in figure <a href="#fig:julia">23</a>.
+Actually, the Julia set here consists of "fractal dust" hidden deep inside the bright
+"islands" in the picture, so what we see is rather the complement of the Julia set.
+Colors indicate rate of divergence;
+for greenish points the iterates <i>f</i><sup>(<i>n</i>)</sup>( <i>z</i> )
+become very large already after a few steps
+(compare with the black overflow region in figure <a href="#fig:twentytimes">22</a>),
+for reddish points the iterates diverge more slowly.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg23">
+</a>   
+<center>    <center>Figure 23: <a name="fig:julia">
+</a>The filled Julia set of <i>f</i> ( <i>z</i> ) = <i>z</i><sup>2</sup> &#8722; 0.75 &#8722; 0.2<i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/julia.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+For other values of <i>c</i>, the behavior of the iterates can be quite different.
+When varying <i>c</i> and investigating the iterates of <i>f</i><sub><i>c</i></sub> ( <i>z</i> ) = <i>z</i><sup>2</sup> + <i>c</i>,
+one obtains the famous Mandelbrot set,
+which contains those <i>c</i> for which <i>f</i><sub><i>c</i></sub><sup>(<i>n</i>)</sup> ( 0 ) does not diverge to infinity.
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc0.11">
+0.11</a>&nbsp;&nbsp;A sine function</h3>
+
+<div class="p"><!----></div>
+Iterating other functions can also produce nice pictures.
+Figure <a href="#fig:sinIter">24</a> shows an example.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg24">
+</a>   
+<center>    <center>Figure 24: <a name="fig:sinIter">
+</a>The fifth iterate <i>f</i><sup>(5)</sup>( <i>z</i> ) of <i>f</i> ( <i>z</i> ) = ( 1 + <i>i</i> ) sin <i>z</i>.
+      Corners at ± 3 ± 3 <i>i</i>.</center>
+    
+    
+      <img alt="Image; see figure caption" src="Visualizing%20complex%20analytic%20functions%20using%20domain%20coloring_files/sin_iter.png">
+    
+    
+  </center>
+
+<div class="p"><!----></div>
+ant to learn more?
+
+<div class="p"><!----></div>
+On the <a href="http://www.mai.liu.se/%7Ehanlu09/complex/">the start page</a> you will find pointers to more information.
+
+<div class="p"><!----></div>
+
+<br><br><hr><small>File translated from
+T<sub><font size="-1">E</font></sub>X
+by <a href="http://hutchinson.belmont.ma.us/tth/">
+T<sub><font size="-1">T</font></sub>H</a>,
+version 3.86.<br>On 26 Feb 2012, 20:28.</small>
+
+</body></html>

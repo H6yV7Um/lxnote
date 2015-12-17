@@ -1,0 +1,34 @@
+* mathMap是什么
+mathMap是一个,可以看底部的链接：
+++ GIMP的图像处理插件
+++ 可以写简单然而强大的脚本
+++ 可以用node可视化操作
+* 典型案例分析
+<<
+filter lx_wave (image in,float h :0-0.2(0.1),float n:0-15(3))
+    in(xy+xy:[sin(y*pi*n),sin(x*pi*n)]*h)
+end
+
+filter __composer_filter__ (image lx_wave_in, float lx_wave_h : 0.000000 - 0.200000 (0.100000), float lx_wave_n : 0.000000 - 15.000000 (3.000000))
+    lx_wave_out = lx_wave(lx_wave_in, lx_wave_h, lx_wave_n);
+    lx_wave_out(xy)
+end
+>>
+用一般来理解特殊。
+lx_wave是一个返回值为filter类型的函数，image本身也是一个函数，他接受xy，返回指定位置的像素的颜色值。filter返回的是一个filter，**_最后一行必须要写成foo(xy)的形式_**。
+* composer和表达式的对应关系
+{{composer_01.png}}
+{{composer_02.png}}
+这里的核心还是脚本表达式。我们可以看到，这里有4个filter函数，最后一个是前面几个的总结。
+**_起作用的只有最后一个表达式，前面的作为函数被引用。参数也只看最后一个表达式即可_**。
+
+* 常用函数
+* 案例分析
+* 复数
+{{complex_01.png}}
+{{complex_02.png}}
+{{complex_03.png}}
+{{complex_04.png}}
+{{complex_05.png}}
+{{complex_06.png}}
+{{complex_07.png}}

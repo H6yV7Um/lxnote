@@ -1,0 +1,323 @@
+
+
+<!-- ********************************************************************************************** -->
+<!-- ********************************************************************************************** -->
+
+
+<!-- ------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+<HTML>
+	<!-- head----------------------------------------------------------------------- -->
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" /> 
+	<HEAD>
+	  <TITLE> gimp_mathMap 2015-12-17 [THURSDAY]</TITLE>
+		<STYLE TYPE="text/css">
+			<!-- 
+				.heiti{font-family:"黑体";}
+				.small{font-family:"黑体";font-size:10pt;margin-right:0}
+				.marginleft{margin-left:26em;margin-right:26em;margin-top:6em}
+                
+				p{font-family:"宋体";font-size:9pt;margin-right:1em;margin-left:2em;color:#333333;line-height:18pt; text-indent:2em   }
+                
+                  
+               
+                
+				#col{position:absolute;right:100px;top:390px;width:350;
+					 height:90%;background-color:#ffffff;z-index:0;overflow:auto;color:#666666}
+				PRE{font-size:10pt;margin-right:3em;margin-left:3em;color:#5500ee;line-height:15pt;border:dashed 1px blue;padding:10px}
+				DD{font-size:10pt;margin-right:0em;margin-left:1em;color:#aa0000;line-height:18pt;}
+				DT{font-size:10pt;margin-right:0em;margin-left:1em;color:#666666;line-height:18pt}
+				TD{font-size:10pt;color:#aa0000;float:left}
+				A{text-decoration:none}
+                ul{color:#885555;margin-left:1em;line-height:30pt;}
+                ul ul{color:#888855;margin-left:1em;line-height:24pt;}
+                ol ul{color:#888855;margin-left:1em;line-height:24pt;}
+                
+                ul ul ul {color:#338888;margin-left:1em;line-height:24pt;}
+                ul ul ul ul{color:#338800;margin-left:1em;line-height:24pt;}
+                ol{color:#8855ee;margin-left:1em;line-height:24pt;left: .4em;}
+                
+                
+                TABLE{cellspacing:0;border-width:2px; border-style:dashed; cellpadding:15;bgcolor:#ffffff;bordercolor:#888888;}
+                HR{border-width:5px;border-style:solid;bordercolor:#999999}
+				H1{margin-left:1em;font-size:13pt;}
+				H2{margin-left:2em;font-size:11pt;}
+                H3{margin-left:3em;font-size:9pt;color:#008888}
+				#key{font-family:"宋体";color:#66aa11;font-size:15pt}
+                #under_line{border:solid 1px red;padding-bottom: 0.3em;padding-top: 0.3em;}
+                #through_line{text-decoration:line-through;color:#aaaaaa}
+                
+			-->
+		</STYLE>
+		
+	</HEAD>
+	<!-- body----------------------------------------------------------------------- -->
+	<BODY class="marginleft">	 
+		<H1 class="heiti" style="color:#CCCCCC;font-size:30pt"><A name="index">gimp_mathMap</A> </H1> 
+        <p align="right">
+            <b class="heiti" style="color:#DDDDDD">
+                2015-12-17  [THURSDAY]
+            </b>
+        </p>
+        <b style="color:#666666" class="heiti"><A HREF=../Gimp.html>&gt;&gt;&gt;&nbsp;GO UP</A> </b>
+		<HR align="left" >
+            <b class="heiti" style="color:#009900;font-size:13pt">
+              
+                <a href="#mathMap是什么">mathMap是什么</a> | <a href="#典型案例分析">典型案例分析</a> | <a href="#composer和表达式的对应关系">composer和表达式的对应关系</a> | <a href="#常用函数">常用函数</a> | <a href="#案例分析">案例分析</a> | <a href="#复数">复数</a>||<a href="#links:">links:</a>
+              
+            
+            
+             
+            </b>
+			  
+		<HR align="left">
+        <BR><BR>
+		  
+		  
+					
+		
+		<UL style="margin-left:0.5em">
+		
+		
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="mathMap是什么">mathMap是什么</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>mathMap是一个,可以看底部的链接：
+<p>
+<p><ol>
+<p><ol>
+<p><li>GIMP的图像处理插件
+<p><li>可以写简单然而强大的脚本
+<p><li>可以用node可视化操作
+<p>
+<p></ol>
+<p></ol>
+
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="典型案例分析">典型案例分析</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<PRE>
+filter lx_wave (image in,float h :0-0.2(0.1),float n:0-15(3))
+    in(xy+xy:[sin(y*pi*n),sin(x*pi*n)]*h)
+end
+
+filter __composer_filter__ (image lx_wave_in, float lx_wave_h : 0.000000 - 0.200000 (0.100000), float lx_wave_n : 0.000000 - 15.000000 (3.000000))
+    lx_wave_out = lx_wave(lx_wave_in, lx_wave_h, lx_wave_n);
+    lx_wave_out(xy)
+end
+</PRE>
+<p>用一般来理解特殊。
+<p>lx_wave是一个返回值为filter类型的函数，image本身也是一个函数，他接受xy，返回指定位置的像素的颜色值。filter返回的是一个filter，<span id="under_line">最后一行必须要写成foo(xy)的形式</span>。
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="composer和表达式的对应关系">composer和表达式的对应关系</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p><IMG SRC="./gimp_mathMap.files/composer_01.png"  HEIGHT=""> </IMG>
+<p><IMG SRC="./gimp_mathMap.files/composer_02.png"  HEIGHT=""> </IMG>
+<p>这里的核心还是脚本表达式。我们可以看到，这里有4个filter函数，最后一个是前面几个的总结。
+<p><span id="under_line">起作用的只有最后一个表达式，前面的作为函数被引用。参数也只看最后一个表达式即可</span>。
+<p>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="常用函数">常用函数</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="案例分析">案例分析</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="复数">复数</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p><IMG SRC="./gimp_mathMap.files/complex_01.png"  HEIGHT=""> </IMG>
+<p><IMG SRC="./gimp_mathMap.files/complex_02.png"  HEIGHT=""> </IMG>
+<p><IMG SRC="./gimp_mathMap.files/complex_03.png"  HEIGHT=""> </IMG>
+<p><IMG SRC="./gimp_mathMap.files/complex_04.png"  HEIGHT=""> </IMG>
+<p><IMG SRC="./gimp_mathMap.files/complex_05.png"  HEIGHT=""> </IMG>
+<p><IMG SRC="./gimp_mathMap.files/complex_06.png"  HEIGHT=""> </IMG>
+<p><IMG SRC="./gimp_mathMap.files/complex_07.png"  HEIGHT=""> </IMG>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+		</UL>
+		<HR align="left"  style="border-width:2px">
+		
+		<H5 class="heiti" style="color:#555599"><a name=links:>links:</a></H5>	
+		
+		
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							<P><A HREF="./gimp_mathMap.files/The MathMap Language Reference Manual.htm">The MathMap Language Reference Manual</A>
+							<BR>
+							
+							
+				
+			
+				 
+							
+							<P><A HREF="./gimp_mathMap.files/The MathMap Language Tutorial.htm">The MathMap Language Tutorial</A>
+							<BR>
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							<P><A HREF="./gimp_mathMap.files/Visualizing complex analytic functions using domain coloring.htm">Visualizing complex analytic functions using domain coloring</A>
+							<BR>
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+		
+
+		<A HREF="#index"><CENTER><P style="color:#ff3300">[GO to index]</CENTER></A>
+	</BODY>
+	<!-- ----------------------------------------------------------------------- -->
+<!-- **keywords="mathMap是什么|典型案例分析|composer和表达式的对应关系|常用函数|案例分析|复数" -->
+<!-- **refs="complex_01.png|complex_02.png|complex_03.png|complex_04.png|complex_05.png|complex_06.png|complex_07.png|complex_08.png|complex_09.png|composer_01.png|composer_02.png|grid.png|MathMap Still Image Examples_files|The MathMap Image Processing Application_files|The MathMap Language Reference Manual|The MathMap Language Tutorial|The MathMap Language Tutorial_files|Visualizing complex analytic functions using domain coloring|Visualizing complex analytic functions using domain coloring_files" -->
+</HTML>
+<!-- -------------------------------------------------------------------------------- -->
+<script ></script>
