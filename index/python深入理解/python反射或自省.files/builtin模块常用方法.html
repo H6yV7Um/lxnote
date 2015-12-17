@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0037)http://www.jb51.net/article/65313.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK"><script async="" src="http://changyan.sohu.com/stat/uvstat?uuid=C6AB26FAF5000001E646861914B01DEE&client_id=cyrHH3dwi&category_id=_&topic_id=580816469&t=1445314695560&callback=jQuery171023560364195145667_1445314695181&_=1445314697561"></script><script async="" src="http://changyan.sohu.com/stat/user?callback=jQuery171023560364195145667_1445314695178&uid=0&uuid=C6AB26FAF5000001E646861914B01DEE&client_id=cyrHH3dwi&topic_id=580816469&comment_id=0&type=LOG-V25-BETA-TOPIC_VIEW&_=1445314695349"></script>
+
+<title>Python的__builtins__模块中的一些要点知识_python_脚本之家</title>
+<meta http-equiv="Content-Language" content="zh-CN">
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+<meta http-equiv="mobile-agent" content="format=html5; url=http://m.jb51.net/article/65313.htm">
+<meta http-equiv="mobile-agent" content="format=xhtml; url=http://m.jb51.net/article/65313.htm">
+<script type="text/javascript">
+(function(){var ua=navigator.userAgent.toLowerCase();var bIsIpad=ua.match(/ipad/i)=="ipad";var bIsIphoneOs=ua.match(/iphone os/i)=="iphone os";var bIsAndroid=ua.match(/android/i)=="android";var bIsWM=ua.match(/windows mobile/i)=="windows mobile";if(bIsIpad||bIsIphoneOs||bIsAndroid||bIsWM){window.location.href="http://m.jb51.net/article/65313.htm"}})();
+</script>
+<meta name="keywords" content="Python">
+<meta name="description" content="这篇文章主要介绍了Python的__builtins__模块中的一些要点知识,是Python学习中的基础,需要的朋友可以参考下">
+<link rel="stylesheet" href="./builtin模块常用方法_files/global.css" type="text/css" media="all">
+<link rel="stylesheet" href="./builtin模块常用方法_files/content.css" type="text/css" media="all">
+<link type="text/css" rel="stylesheet" href="./builtin模块常用方法_files/shCore.css">
+<link type="text/css" rel="Stylesheet" href="./builtin模块常用方法_files/shThemeDefault.css">
+<script type="text/javascript" src="./builtin模块常用方法_files/function.js"></script>
+<script type="text/javascript" charset="UTF-8" src="./builtin模块常用方法_files/version.js"></script><script src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=401475"></script><script type="text/javascript" charset="UTF-8" src="./builtin模块常用方法_files/cookie"></script><script type="text/javascript" charset="UTF-8" src="./builtin模块常用方法_files/cyrHH3dwi"></script><script type="text/javascript" charset="UTF-8" src="http://changyan.sohu.com/stat/event?clientid=cyrHH3dwi&topicId=0&uuid=C6AB26FAF5000001E646861914B01DEE&type=LOG-V25-BETA-APP-ACCESS&1445314695019"></script><script type="text/javascript" charset="UTF-8" src="./builtin模块常用方法_files/sea.v2.2.0.js"></script><script type="text/javascript" charset="UTF-8" src="./builtin模块常用方法_files/app-build.js"></script><link rel="stylesheet" type="text/css" href="./builtin模块常用方法_files/upload-img.css"><style id="changyanCss">#SOHUCS{clear:both;min-height:320;_height:320px;overflow:visible;}#SOHUCS iframe{width:100%;min-height:320px;_height:320px;}</style><link charset="utf-8" rel="stylesheet" href="http://changyan.itc.cn/v2.5/v20151014100/src/css/changyan2.css?20151014100"><link charset="utf-8" rel="stylesheet" href="http://changyan.itc.cn/v2.5/v20151014100/src/css/skin/default_red/default.css?20151014100"><link href="http://changyan.itc.cn/activity/activity_js/changyan_config.css" rel="stylesheet"></head>
+<body>
+<div id="topnav">
+<div class="wrap">
+<div id="toptext">脚 本 之 家 www.jb51.net</div>
+<ul id="topnavlist">
+<script type="text/javascript" charset="gb2312">dy("top");</script>
+</ul>
+</div>
+</div>
+<div class="wrap">
+<div id="dxy_logo">
+<div id="logo_l"><a href="http://www.jb51.net/" title="脚本之家" target="_blank"><img src="./builtin模块常用方法_files/logo.gif" alt="脚本之家"></a></div>
+<div id="logo_m"></div>
+<div id="logo_r"></div>
+</div><!--导航开始-->
+<div id="nav_top">
+<ul>
+<li class="current"><a href="http://www.jb51.net/">首页</a></li>
+<li><a href="http://www.jb51.net/web/">网页制作</a></li>
+<li><a href="http://www.jb51.net/list/index_96.htm">脚本专栏</a></li>
+<li><a href="http://www.jb51.net/jiaoben/">脚本下载</a></li>
+<li><a href="http://www.jb51.net/list/index_1.htm">网络编程</a></li>
+<li><a href="http://www.jb51.net/list/index_104.htm">数据库</a></li>
+<li><a href="http://www.jb51.net/cms/">CMS教程</a></li>
+<li><a href="http://www.jb51.net/books/">电子书籍</a></li>
+<li><a href="http://www.jb51.net/pingmian/">平面设计</a></li>
+<li><a href="http://www.jb51.net/media/">媒体动画</a></li>
+<li><a href="http://www.jb51.net/os/">操作系统</a></li>
+<li><a href="http://www.jb51.net/yunying/">网站运营</a></li>
+<li class="last"><a href="http://www.jb51.net/hack/">网络安全</a></li>
+</ul>
+</div><!--导航结束-->
+<div class="blank3"></div>
+<div class="subnav">
+<ul><li><a href="http://www.jb51.net/list/list_114_1.htm" title="vbs">vbs</a></li>
+<li><a href="http://www.jb51.net/list/list_106_1.htm" title="DOS/BAT">DOS/BAT</a></li>
+<li><a href="http://www.jb51.net/list/list_110_1.htm" title="hta">hta</a></li>
+<li><a href="http://www.jb51.net/list/list_111_1.htm" title="htc">htc</a></li>
+<li><a href="http://www.jb51.net/list/list_97_1.htm" title="python">python</a></li>
+<li><a href="http://www.jb51.net/list/list_125_1.htm" title="perl">perl</a></li>
+<li><a href="http://www.jb51.net/list/list_138_1.htm" title="游戏相关">游戏相关</a></li>
+<li><a href="http://www.jb51.net/list/list_161_1.htm" title="VBA">VBA</a></li>
+<li><a href="http://www.jb51.net/list/list_163_1.htm" title="远程脚本">远程脚本</a></li>
+<li><a href="http://www.jb51.net/list/list_178_1.htm" title="ColdFusion">ColdFusion</a></li>
+<li><a href="http://www.jb51.net/list/list_201_1.htm" title="ruby专题">ruby专题</a></li>
+<li><a href="http://www.jb51.net/list/list_213_1.htm" title="autoit">autoit</a></li>
+<li><a href="http://www.jb51.net/list/list_214_1.htm" title="seraphzone">seraphzone</a></li>
+<li><a href="http://www.jb51.net/list/list_234_1.htm" title="PowerShell">PowerShell</a></li>
+<li><a href="http://www.jb51.net/list/list_235_1.htm" title="linux shell">linux shell</a></li>
+<li><a href="http://www.jb51.net/list/list_245_1.htm" title="Lua">Lua</a></li>
+<li><a href="http://www.jb51.net/list/list_246_1.htm" title="Golang">Golang</a></li>
+<li><a href="http://www.jb51.net/list/list_249_1.htm" title="Erlang ">Erlang </a></li>
+<li><a href="http://www.jb51.net/list/list_130_1.htm" title="其它">其它</a></li>
+</ul>
+</div>
+<div class="blank3"></div>
+<div class="search">
+<ul><li class="search-hot"><span>特色栏目：</span>
+<a href="http://www.jb51.net/list/list_114_1.htm" target="_blank">vbscript</a> 
+<a href="http://www.jb51.net/list/list_6_1.htm" target="_blank">正则表达式</a> 
+<a href="http://www.jb51.net/list/list_3_1.htm" target="_blank">javascript</a>
+<a href="http://www.jb51.net/list/list_106_1.htm" target="_blank">批处理</a>
+<a href="http://s.jb51.net/">服务器软件</a> 
+<a href="http://sc.jb51.net/?txt" target="_blank" style="color:red">素材下载</a> 
+</li><li class="search-box">
+<div class="sall">
+<form action="http://so.jb51.net/cse/search" target="_blank">
+    <input type="hidden" name="s" value="10520733385329581432">
+    <input type="hidden" name="ie" value="gbk">
+    <input type="text" name="q" class="keyword_input">
+    <input type="submit" value="搜索" class="s_btn">
+</form></div>
+</li></ul>
+</div>
+<div class="blank3"></div>
+<div class="tonglanad">
+<script type="text/javascript">var tougao="goldensun";var lmname="python";dy("bdtl");</script>
+</div>
+<div class="blank3"></div>
+<div id="tonglan1"></div>
+<div class="blank3"></div>
+<div class="dxy_main">
+<div class="dxy_main_l">
+<div id="art_con">
+<div id="daohang">页面导航：  <a href="http://www.jb51.net/">首页</a> → <a href="http://www.jb51.net/list/index_96.htm" title="脚本专栏">脚本专栏</a> → <a href="http://www.jb51.net/list/list_97_1.htm" title="python">python</a> → 正文内容 __builtins__模块要点<div class="blank3"></div></div>
+<div class="blank3"></div>
+<h1>Python的__builtins__模块中的一些要点知识</h1>
+<div id="art_info">
+投稿：goldensun  字体：[<a href="javascript:turnbig()">增加</a> <a href="javascript:turnsmall()">减小</a>] 类型：转载 时间：2015-05-02
+</div><!--end art_info-->
+<div class="blank3"></div>
+<div id="art_demo">这篇文章主要介绍了Python的__builtins__模块中的一些要点知识,是Python学习中的基础,需要的朋友可以参考下</div>
+<div class="blank3"></div>
+<div id="con_all">
+<script type="text/javascript">dy("bcall");</script>
+</div>
+<div id="art_content">
+<!--NEWSZW_HZH_BEGIN-->
+<p>1.isinstance函数：除了以一个类型作为参数，还可以以一个类型元组作为参数。</p>
+<div class="jb51code">
+<div><div id="highlighter_961395" class="syntaxhighlighter  py"><div class="toolbar"><span><a href="http://www.jb51.net/article/65313.htm#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="py functions">isinstance</code><code class="py plain">(obj,</code><code class="py functions">basestring</code><code class="py plain">)</code><code class="py keyword">=</code><code class="py keyword">=</code><code class="py keyword">=</code><code class="py functions">isinstance</code><code class="py plain">(obj,(</code><code class="py functions">str</code><code class="py plain">,</code><code class="py functions">unicode</code><code class="py plain">))</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>2.getattr函数：可以给一个默认值，以免触发错误。</p>
+<div class="jb51code">
+<div><div id="highlighter_752935" class="syntaxhighlighter  py"><div class="toolbar"><span><a href="http://www.jb51.net/article/65313.htm#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="py plain">writte</code><code class="py keyword">=</code><code class="py functions">getattr</code><code class="py plain">(obj,</code><code class="py string">'write'</code><code class="py plain">,sys.stdout.write)</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>3.type函数：即可以得到一个对象的类型，也可以直接由它创建一个新类型：<br>
+</p>
+<div class="jb51code">
+<div><div id="highlighter_586752" class="syntaxhighlighter  py"><div class="toolbar"><span><a href="http://www.jb51.net/article/65313.htm#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div><div class="line number34 index33 alt1">34</div><div class="line number35 index34 alt2">35</div><div class="line number36 index35 alt1">36</div><div class="line number37 index36 alt2">37</div><div class="line number38 index37 alt1">38</div><div class="line number39 index38 alt2">39</div><div class="line number40 index39 alt1">40</div><div class="line number41 index40 alt2">41</div><div class="line number42 index41 alt1">42</div><div class="line number43 index42 alt2">43</div><div class="line number44 index43 alt1">44</div><div class="line number45 index44 alt2">45</div><div class="line number46 index45 alt1">46</div><div class="line number47 index46 alt2">47</div><div class="line number48 index47 alt1">48</div><div class="line number49 index48 alt2">49</div><div class="line number50 index49 alt1">50</div><div class="line number51 index50 alt2">51</div><div class="line number52 index51 alt1">52</div><div class="line number53 index52 alt2">53</div><div class="line number54 index53 alt1">54</div><div class="line number55 index54 alt2">55</div><div class="line number56 index55 alt1">56</div><div class="line number57 index56 alt2">57</div><div class="line number58 index57 alt1">58</div><div class="line number59 index58 alt2">59</div><div class="line number60 index59 alt1">60</div><div class="line number61 index60 alt2">61</div><div class="line number62 index61 alt1">62</div><div class="line number63 index62 alt2">63</div><div class="line number64 index63 alt1">64</div><div class="line number65 index64 alt2">65</div><div class="line number66 index65 alt1">66</div><div class="line number67 index66 alt2">67</div><div class="line number68 index67 alt1">68</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="py plain">&gt;&gt;&gt; Point</code><code class="py keyword">=</code><code class="py functions">type</code><code class="py plain">(</code><code class="py string">'Point'</code><code class="py plain">,(</code><code class="py functions">object</code><code class="py plain">,),{</code><code class="py string">'x'</code><code class="py plain">:</code><code class="py value">0</code><code class="py plain">,</code><code class="py string">'y'</code><code class="py plain">:</code><code class="py value">0</code><code class="py plain">})</code></div><div class="line number2 index1 alt1"><code class="py plain">&gt;&gt;&gt; p</code><code class="py keyword">=</code><code class="py plain">Point()</code></div><div class="line number3 index2 alt2"><code class="py plain">&gt;&gt;&gt; p.x,p.y</code></div><div class="line number4 index3 alt1"><code class="py plain">(</code><code class="py value">0</code><code class="py plain">, </code><code class="py value">0</code><code class="py plain">)</code></div><div class="line number5 index4 alt2"><code class="py plain">&gt;&gt;&gt; p</code><code class="py keyword">=</code><code class="py plain">Point(</code><code class="py value">3</code><code class="py plain">,</code><code class="py value">8</code><code class="py plain">)</code></div><div class="line number6 index5 alt1"><code class="py plain">Traceback (most recent call last):</code></div><div class="line number7 index6 alt2"><code class="py spaces">&nbsp;</code><code class="py functions">File</code> <code class="py string">"&lt;pyshell#55&gt;"</code><code class="py plain">, line </code><code class="py value">1</code><code class="py plain">, </code><code class="py keyword">in</code> <code class="py plain">&lt;module&gt;</code></div><div class="line number8 index7 alt1"><code class="py spaces">&nbsp;&nbsp;</code><code class="py plain">p</code><code class="py keyword">=</code><code class="py plain">Point(</code><code class="py value">3</code><code class="py plain">,</code><code class="py value">8</code><code class="py plain">)</code></div><div class="line number9 index8 alt2"><code class="py plain">TypeError: </code><code class="py functions">object</code><code class="py plain">() takes no parameters</code></div><div class="line number10 index9 alt1"><code class="py plain">&gt;&gt;&gt; pprint.pprint(</code><code class="py functions">dir</code><code class="py plain">(Point))</code></div><div class="line number11 index10 alt2"><code class="py plain">[</code><code class="py string">'__class__'</code><code class="py plain">,</code></div><div class="line number12 index11 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__delattr__'</code><code class="py plain">,</code></div><div class="line number13 index12 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__dict__'</code><code class="py plain">,</code></div><div class="line number14 index13 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__doc__'</code><code class="py plain">,</code></div><div class="line number15 index14 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__format__'</code><code class="py plain">,</code></div><div class="line number16 index15 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__getattribute__'</code><code class="py plain">,</code></div><div class="line number17 index16 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__hash__'</code><code class="py plain">,</code></div><div class="line number18 index17 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__init__'</code><code class="py plain">,</code></div><div class="line number19 index18 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__module__'</code><code class="py plain">,</code></div><div class="line number20 index19 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__new__'</code><code class="py plain">,</code></div><div class="line number21 index20 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__reduce__'</code><code class="py plain">,</code></div><div class="line number22 index21 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__reduce_ex__'</code><code class="py plain">,</code></div><div class="line number23 index22 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__repr__'</code><code class="py plain">,</code></div><div class="line number24 index23 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__setattr__'</code><code class="py plain">,</code></div><div class="line number25 index24 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__sizeof__'</code><code class="py plain">,</code></div><div class="line number26 index25 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__str__'</code><code class="py plain">,</code></div><div class="line number27 index26 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__subclasshook__'</code><code class="py plain">,</code></div><div class="line number28 index27 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__weakref__'</code><code class="py plain">,</code></div><div class="line number29 index28 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'x'</code><code class="py plain">,</code></div><div class="line number30 index29 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'y'</code><code class="py plain">]</code></div><div class="line number31 index30 alt2"><code class="py plain">&gt;&gt;&gt; p.name</code><code class="py keyword">=</code><code class="py string">'source point'</code></div><div class="line number32 index31 alt1"><code class="py plain">&gt;&gt;&gt; p.name</code></div><div class="line number33 index32 alt2"><code class="py string">'source point'</code></div><div class="line number34 index33 alt1"><code class="py plain">&gt;&gt;&gt; pprint.pprint(</code><code class="py functions">dir</code><code class="py plain">(p))</code></div><div class="line number35 index34 alt2"><code class="py plain">[</code><code class="py string">'__class__'</code><code class="py plain">,</code></div><div class="line number36 index35 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__delattr__'</code><code class="py plain">,</code></div><div class="line number37 index36 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__dict__'</code><code class="py plain">,</code></div><div class="line number38 index37 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__doc__'</code><code class="py plain">,</code></div><div class="line number39 index38 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__format__'</code><code class="py plain">,</code></div><div class="line number40 index39 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__getattribute__'</code><code class="py plain">,</code></div><div class="line number41 index40 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__hash__'</code><code class="py plain">,</code></div><div class="line number42 index41 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__init__'</code><code class="py plain">,</code></div><div class="line number43 index42 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__module__'</code><code class="py plain">,</code></div><div class="line number44 index43 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__new__'</code><code class="py plain">,</code></div><div class="line number45 index44 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__reduce__'</code><code class="py plain">,</code></div><div class="line number46 index45 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__reduce_ex__'</code><code class="py plain">,</code></div><div class="line number47 index46 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__repr__'</code><code class="py plain">,</code></div><div class="line number48 index47 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__setattr__'</code><code class="py plain">,</code></div><div class="line number49 index48 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__sizeof__'</code><code class="py plain">,</code></div><div class="line number50 index49 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__str__'</code><code class="py plain">,</code></div><div class="line number51 index50 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'__subclasshook__'</code><code class="py plain">,</code></div><div class="line number52 index51 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'__weakref__'</code><code class="py plain">,</code></div><div class="line number53 index52 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'name'</code><code class="py plain">,</code></div><div class="line number54 index53 alt1"><code class="py spaces">&nbsp;</code><code class="py string">'x'</code><code class="py plain">,</code></div><div class="line number55 index54 alt2"><code class="py spaces">&nbsp;</code><code class="py string">'y'</code><code class="py plain">]</code></div><div class="line number56 index55 alt1"><code class="py plain">&gt;&gt;&gt; </code><code class="py keyword">def</code> <code class="py plain">tostr(</code><code class="py color1">self</code><code class="py plain">):</code></div><div class="line number57 index56 alt2"><code class="py spaces">&nbsp;&nbsp;</code><code class="py keyword">return</code> <code class="py string">'(%s,%s)'</code><code class="py keyword">%</code><code class="py plain">(</code><code class="py color1">self</code><code class="py plain">.x,</code><code class="py color1">self</code><code class="py plain">.y)</code></div><div class="line number58 index57 alt1"><code class="py plain">&gt;&gt;&gt; Point.__str__</code><code class="py keyword">=</code><code class="py plain">tostr</code></div><div class="line number59 index58 alt2"><code class="py plain">&gt;&gt;&gt; </code><code class="py functions">print</code> <code class="py plain">p</code></div><div class="line number60 index59 alt1"><code class="py plain">(</code><code class="py value">0</code><code class="py plain">,</code><code class="py value">0</code><code class="py plain">)</code></div><div class="line number61 index60 alt2"><code class="py plain">&gt;&gt;&gt; </code><code class="py keyword">def</code> <code class="py plain">init(</code><code class="py color1">self</code><code class="py plain">,x,y):</code></div><div class="line number62 index61 alt1"><code class="py spaces">&nbsp;&nbsp;</code><code class="py color1">self</code><code class="py plain">.x,</code><code class="py color1">self</code><code class="py plain">.y</code><code class="py keyword">=</code><code class="py plain">x,y</code></div><div class="line number63 index62 alt2"><code class="py spaces">&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number64 index63 alt1"><code class="py plain">&gt;&gt;&gt; Point.__init__</code><code class="py keyword">=</code><code class="py plain">init</code></div><div class="line number65 index64 alt2"><code class="py plain">&gt;&gt;&gt; p2</code><code class="py keyword">=</code><code class="py plain">Point(</code><code class="py value">6</code><code class="py plain">,</code><code class="py value">8</code><code class="py plain">)</code></div><div class="line number66 index65 alt1"><code class="py plain">&gt;&gt;&gt; </code><code class="py functions">print</code> <code class="py plain">p2</code></div><div class="line number67 index66 alt2"><code class="py plain">(</code><code class="py value">6</code><code class="py plain">,</code><code class="py value">8</code><code class="py plain">)</code></div><div class="line number68 index67 alt1"><code class="py plain">&gt;&gt;&gt;</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>4.issubclass(bool,int)==True</p>
+<p>5.numbers.Number是所有数字类型的基类</p>
+<p>6.type(None)==NoneType，None是一个常量</p>
+<p>7.iter函数除了iter(object)形式，还有iter(callable,sentinel)也是返回一个iterator对象<br>
+</p>
+<div class="jb51code">
+<div><div id="highlighter_241419" class="syntaxhighlighter  py"><div class="toolbar"><span><a href="http://www.jb51.net/article/65313.htm#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="py plain">&gt;&gt;&gt; </code><code class="py keyword">def</code> <code class="py plain">getrand():</code></div><div class="line number2 index1 alt1"><code class="py spaces">&nbsp;&nbsp;</code><code class="py keyword">import</code> <code class="py plain">random</code></div><div class="line number3 index2 alt2"><code class="py spaces">&nbsp;&nbsp;</code><code class="py keyword">return</code> <code class="py plain">random.randint(</code><code class="py value">1</code><code class="py plain">,</code><code class="py value">100</code><code class="py plain">)</code></div><div class="line number4 index3 alt1"><code class="py plain">&gt;&gt;&gt; </code><code class="py keyword">for</code> <code class="py plain">i </code><code class="py keyword">in</code> <code class="py functions">iter</code><code class="py plain">(getrand,</code><code class="py value">50</code><code class="py plain">):</code><code class="py functions">print</code> <code class="py plain">i,</code><code class="py comments">#获取第一次得到50之前的所有1-100的随机数</code></div><div class="line number5 index4 alt2"><code class="py value">32</code> <code class="py value">19</code> <code class="py value">82</code> <code class="py value">28</code> <code class="py value">30</code> <code class="py value">41</code> <code class="py value">100</code> <code class="py value">39</code> <code class="py value">71</code> <code class="py value">29</code> <code class="py value">45</code> <code class="py value">30</code> <code class="py value">94</code> <code class="py value">77</code> <code class="py value">62</code> <code class="py value">26</code> <code class="py value">25</code> <code class="py value">19</code> <code class="py value">82</code> <code class="py value">20</code> <code class="py value">55</code> <code class="py value">20</code> <code class="py value">43</code> <code class="py value">73</code></div><div class="line number6 index5 alt1"><code class="py plain">&gt;&gt;&gt; </code><code class="py keyword">for</code> <code class="py plain">i </code><code class="py keyword">in</code> <code class="py functions">iter</code><code class="py plain">(getrand,</code><code class="py value">50</code><code class="py plain">):</code><code class="py functions">print</code> <code class="py plain">i,</code><code class="py comments">#获取第一次得到50之前的所有1-100的随机数</code></div><div class="line number7 index6 alt2"><code class="py value">22</code> <code class="py value">54</code> <code class="py value">14</code> <code class="py value">25</code> <code class="py value">60</code> <code class="py value">65</code> <code class="py value">16</code> <code class="py value">80</code> <code class="py value">61</code> <code class="py value">5</code> <code class="py value">48</code> <code class="py value">61</code> <code class="py value">2</code> <code class="py value">30</code> <code class="py value">90</code> <code class="py value">98</code> <code class="py value">70</code> <code class="py value">10</code> <code class="py value">55</code> <code class="py value">45</code> <code class="py value">23</code> <code class="py value">72</code> <code class="py value">87</code> <code class="py value">39</code> <code class="py value">70</code> <code class="py value">3</code> <code class="py value">84</code> <code class="py value">85</code></div><div class="line number8 index7 alt1"><code class="py plain">&gt;&gt;&gt;</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>8.BaseException是一切exceptions的基类，Exception只是一切不exit的exceptions的基类</p>
+<p>9.locals/globals/vars/dir：</p>
+<p>[1]locals/globals很简单，是相对于当前作用域的本地/全局对象dict;</p>
+<p>[2]vars()==locals()，vars(obj)==obj.__dict__</p>
+<p>[3]没有参数，set(dir())==set(locals().keys())；if hasattr(obj,'__dir__')=&gt;dir(obj)==obj.__dir__()；否则，如果obj是模块对象，dir(obj)返回的是模块的所有属性；如果obj是类对象，dir(obj)返回的是类的所有属性，然后是从基类继承来的属性；如果obj是实例对象，dir(obj)返回的是实例对象专有的属性、其所属类的属性、其所属类基类继承来的属性。【对类对象的任何修改，必将反映到其实例对象上；对基类的任何修改，也必将反映到派生类上。当然，属性遮蔽的情况除外。】</p>
+<p>10.enumerate函数：enumerate(obj,[start])，如果定义了start，则序数将从start开始，而不是从默认的零开始。<br>
+</p>
+<div class="jb51code">
+<div><div id="highlighter_771139" class="syntaxhighlighter  py"><div class="toolbar"><span><a href="http://www.jb51.net/article/65313.htm#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="py plain">&gt;&gt;&gt; </code><code class="py keyword">for</code> <code class="py plain">i,name </code><code class="py keyword">in</code> <code class="py functions">enumerate</code><code class="py plain">([</code><code class="py string">'C'</code><code class="py plain">,</code><code class="py string">'C++'</code><code class="py plain">,</code><code class="py string">'CSharp'</code><code class="py plain">,</code><code class="py string">'Java'</code><code class="py plain">,</code><code class="py string">'Python'</code><code class="py plain">],</code><code class="py value">1</code><code class="py plain">):</code></div><div class="line number2 index1 alt1"><code class="py spaces">&nbsp;&nbsp;</code><code class="py functions">print</code> <code class="py string">'%d.%s'</code><code class="py keyword">%</code><code class="py plain">(i,name)</code></div><div class="line number3 index2 alt2"><code class="py value">1.C</code></div><div class="line number4 index3 alt1"><code class="py value">2.C</code><code class="py keyword">+</code><code class="py keyword">+</code></div><div class="line number5 index4 alt2"><code class="py value">3.CSharp</code></div><div class="line number6 index5 alt1"><code class="py value">4.Java</code></div><div class="line number7 index6 alt2"><code class="py value">5.Python</code></div><div class="line number8 index7 alt1"><code class="py plain">&gt;&gt;&gt;</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<!--NEWSZW_HZH_END-->
+
+<div id="art_xg">
+<h4>您可能感兴趣的文章:</h4><ul><li><a href="http://www.jb51.net/article/57656.htm" title="Python常用模块介绍" target="_blank">Python常用模块介绍</a></li><li><a href="http://www.jb51.net/article/57652.htm" title="Python使用py2exe打包程序介绍" target="_blank">Python使用py2exe打包程序介绍</a></li><li><a href="http://www.jb51.net/article/57649.htm" title="Python实现的tab文件操作类分享" target="_blank">Python实现的tab文件操作类分享</a></li></ul>
+<div id="con_da2">
+<script type="text/javascript">dy("baidu580");</script>
+</div>
+</div>
+<div id="con_bo"></div>
+</div>
+<div class="blank3"></div>
+<div id="shoucang">
+    <div class="bdsharebuttonbox"><a class="bds_more" href="http://share.baidu.com/code#" data-cmd="more"></a><a class="bds_qzone" title="分享到QQ空间" href="http://share.baidu.com/code#" data-cmd="qzone"></a><a class="bds_tsina" title="分享到新浪微博" href="http://share.baidu.com/code#" data-cmd="tsina"></a><a class="bds_tqq" title="分享到腾讯微博" href="http://share.baidu.com/code#" data-cmd="tqq"></a><a class="bds_renren" title="分享到人人网" href="http://share.baidu.com/code#" data-cmd="renren"></a><a class="bds_weixin" title="分享到微信" href="http://share.baidu.com/code#" data-cmd="weixin"></a></div>
+</div>
+<div class="blank3"></div>
+<div class="tags">
+<strong>Tags：</strong><a href="http://img.jb51.net/tag/Python/1.htm" target="_blank" title="搜索关于Python的文章">Python</a> 
+</div>
+<div class="blank3"></div>
+<div class="con_ff">
+<a title="复制本文链接发给你QQ/MSN上的好友" href="javascript: copyUserHomeToClipBoard()" rel="nofollow" class="button_link">复制链接</a><a href="javascript:addBookmark(document.title,document.location.href)" class="button_link">收藏本文</a><a href="javascript:doPrint();" class="button_link">打印本文</a><a href="javascript:closeWindow()" class="button_link">关闭本文</a><a href="http://www.jb51.net/index.htm" class="button_link">返回首页</a>
+</div>
+<div id="prenext">
+<div id="prv">上一篇：<a href="http://www.jb51.net/article/65312.htm" title="一些Python中的二维数组的操作方法">一些Python中的二维数组的操作方法</a></div><div id="next">下一篇：<a href="http://www.jb51.net/article/72578.htm">Python监控主机是否存活并以邮件报警</a></div>
+</div>
+<div class="blank3"></div>
+<div id="relatedarticle">
+<h2>相关文章</h2>
+<ul><li><span>2015-07-07</span><a href="http://www.jb51.net/article/69774.htm" title="在Django的模型中执行原始SQL查询的方法" target="_blank">在Django的模型中执行原始SQL查询的方法</a></li><li><span>2015-08-08</span><a href="http://www.jb51.net/article/71256.htm" title="详解Python中映射类型的内建函数和工厂函数" target="_blank">详解Python中映射类型的内建函数和工厂函数</a></li><li><span>2014-05-05</span><a href="http://www.jb51.net/article/49762.htm" title="Python中使用动态变量名的方法" target="_blank">Python中使用动态变量名的方法</a></li><li><span>2014-01-01</span><a href="http://www.jb51.net/article/46285.htm" title="paramiko模块安装和使用(远程登录服务器)" target="_blank">paramiko模块安装和使用(远程登录服务器)</a></li><li><span>2015-05-05</span><a href="http://www.jb51.net/article/65856.htm" title="python单元测试unittest实例详解" target="_blank">python单元测试unittest实例详解</a></li><li><span>2014-07-07</span><a href="http://www.jb51.net/article/52558.htm" title="Python数组条件过滤filter函数使用示例" target="_blank">Python数组条件过滤filter函数使用示例</a></li><li><span>2015-05-05</span><a href="http://www.jb51.net/article/66050.htm" title="总结Python中逻辑运算符的使用" target="_blank">总结Python中逻辑运算符的使用</a></li><li><span>2015-04-04</span><a href="http://www.jb51.net/article/65179.htm" title="在Python中使用SQLite的简单教程" target="_blank">在Python中使用SQLite的简单教程</a></li><li><span>2013-03-03</span><a href="http://www.jb51.net/article/34464.htm" title="Python编码时应该注意的几个情况" target="_blank">Python编码时应该注意的几个情况</a></li><li><span>2015-05-05</span><a href="http://www.jb51.net/article/66796.htm" title="Python pickle模块用法实例分析" target="_blank">Python pickle模块用法实例分析</a></li></ul>
+<div class="clear"></div></div>
+<div class="art_bot_ad"><script type="text/javascript" charset="gb2312">dy("bdtxt");</script></div>
+<div id="comments">
+<h2>文章评论</h2>
+<div id="commentList">
+<div id="SOHUCS" sid="art_65313" style="width: 100%; height: auto;"><div id="SOHU_MAIN"><div id="SOHU-comment-main" class="sohu-comment-wrapper"><div id="article_info_sohu">        <div class="reset-g clear-g section-title-w  section-title-logoutStyle">
+            <div class="title-join-w">
+                <div class="join-wrap-w join-wrap-b"><strong class="wrap-name-w wrap-name-b">评论</strong><span class="wrap-join-w wrap-join-b">(<em class="join-strong-gw join-strong-bg">0</em><span node-type="involved">人参与</span><i class="gap-b">，</i><em class="join-strong-gw join-strong-bg">0</em><span node-type="comments">条评论</span>)</span></div>
+            </div>
+            <div class="title-user-w">
+                <div node-type="sohu-pact" class="title-link-w" style="display: none;"><a href="http://zt.pinglun.sohu.com/s2014/sljyhgy/index.shtml" target="_blank">搜狐“我来说两句”用户公约</a></div>
+            </div>
+        </div>
+        </div><div id="login_sohu"></div><div id="comment_sohu"><div node-type="cbox-wrapper" class="reset-g section-cbox-w"><div style="width:1px;height:1px;overflow:hidden;"><img src="./builtin模块常用方法_files/vcode.jpg" style="visibility:hidden;width:1px;height:1px;"></div><div class="clear-g cbox-block-w">
+            <div class="block-head-w">
+                <div class="head-img-w">
+                                        <a node-type="user-avatar" href="javascript:void(0)" target="_self"><img src="./builtin模块常用方法_files/pic42_null.gif" onerror="SOHUCS.isImgErr(this)" width="42" height="42" alt=""></a>
+                    </div>
+                <!--
+                                <div class="head-gold-w"><a href="javascript:void(0)">金币</a></div>
+                -->
+            </div>
+        <div class="block-post-w block-post-default-e"><div class="post-wrap-w post-wrap-b"><div class="wrap-area-w"><div class="area-textarea-w" style="position:relative;zoom:1;z-index:9;"><textarea name="" class="textarea-fw textarea-bf">来说两句吧...</textarea></div></div><div class="clear-g wrap-action-w wrap-action-b"><div class="action-function-w action-function-b relative-z-w"><ul class="clear-g"><li class="function-face-w"><a href="javascript:void(0)" class="effect-w" title="表情"><i class="face-b"></i></a></li><li class="function-uploadimg-w"><a href="javascript:void(0)" class="effect-w" title="上传图片"><i class="uploadimg-b"></i></a><div class="uploadimg-file-w"><input class="file-fw" id="img_upload" name="file" type="file" accept="image/*"></div><div class="img-btn-cover" style="width:40px;height:40px;margin-top:-40px;z-index:-1;position: relative;"></div></li><!--<li class="function-at-w"><a href="javascript:void(0)" class="effect-w"><i class="at-b"></i></a></li>--></ul></div><div class="clear-g action-issue-w"><div class="issue-btn-w"><a href="javascript:void(0)"><button class="btn-fw btn-bf btn-fw-main">发布</button></a></div></div></div></div>
+                                    <div node-type="login-list" class="post-login-w">
+                <ul class="clear-g">
+                                                            <li style="display:block">
+                        <div class="login-wrap-w login-wrap-b">
+                            <a data-key="sina" target="_self" href="javascript:;" title="新浪微博" alt="新浪微博">
+                                <span class="wrap-icon-w icon30-sina-b"></span><span class="wrap-name-w wrap-name-b">微博登录</span>
+                            </a>
+                        </div>
+                    </li>
+                                        <li style="display:block">
+                        <div class="login-wrap-w login-wrap-b">
+                            <a data-key="qq" target="_self" href="javascript:;" title="QQ" alt="QQ">
+                                <span class="wrap-icon-w icon30-qq-b"></span><span class="wrap-name-w wrap-name-b">QQ登录</span>
+                            </a>
+                        </div>
+                    </li>
+                                        <li>
+                        <div class="login-wrap-w login-wrap-b login-wrap-visitor-b">
+                            <a data-key="visitor" target="_self" href="javascript:void(0)">
+                                <span class="wrap-icon-w icon30-visitor-b"></span><span class="wrap-name-w wrap-name-b">游客</span>
+                            </a>
+                        </div>
+                    </li>
+                    </ul>
+            </div>
+            </div></div><div node-type="prompt-no-privilege" class="cbox-prompt-w" style="display: none;">
+            <span class="prompt-empty-w prompt-empty-b">等级不够，发表评论升至指定级别才能获得该特权。详情请参见<a node-type="privilege-intro" href="javascript:;">等级说明</a>。</span>
+        </div></div></div><div id="list_sort_sohu"></div><div id="list_sohu" topicid="580816469">
+        <div class="reset-g section-list-w">
+            <div class="list-comment-empty-w">
+                <div class="empty-prompt-w"><span class="prompt-null-w prompt-null-b">还没有评论，快来抢沙发吧！</span></div>
+            </div>
+        </div></div><div id="list_hot"></div><div id="page_sohu"></div><div id="more_list_sohu"></div><div id="powerby_sohu">        <div class="reset-g section-service-w">
+            <div class="service-wrap-w service-wrap-b"><a node-type="powered-by" href="http://changyan.sohu.com/?from=changyan" target="_blank">Powered by 畅言</a></div>
+        </div></div></div></div></div>
+</div>
+</div>
+<div class="blank3"></div>
+<div class="sm"><script type="text/javascript" charset="gb2312">dy("sm");</script></div>
+<div class="blank3"></div>
+<div id="hm_t_3717"></div>
+<div class="blank3"></div>
+</div>
+</div><!--end dxy_mainl-->
+<div class="dxy_main_r">
+<div class="rbg" id="art_1"><script type="text/javascript">dy("r1");</script></div>
+<div class="blank3"></div>
+<div class="r_title"><h6>最 近 更 新</h6></div>
+<div class="rightContent">
+<ul><li><a href="http://www.jb51.net/article/55545.htm" title="Python单链表的简单实现方法" target="_blank">Python单链表的简单实现方法</a></li><li><a href="http://www.jb51.net/article/62936.htm" title="Flask入门教程实例：搭建一个静态博客" target="_blank">Flask入门教程实例：搭建一个静态博客</a></li><li><a href="http://www.jb51.net/article/63773.htm" title="Python CSV模块使用实例" target="_blank">Python CSV模块使用实例</a></li><li><a href="http://www.jb51.net/article/54267.htm" title="Python中声明只包含一个元素的元组数据方法" target="_blank">Python中声明只包含一个元素的元组数据方</a></li><li><a href="http://www.jb51.net/article/56017.htm" title="python中二维阵列的变换实例" target="_blank">python中二维阵列的变换实例</a></li><li><a href="http://www.jb51.net/article/56081.htm" title="跟老齐学Python之关于类的初步认识" target="_blank">跟老齐学Python之关于类的初步认识</a></li><li><a href="http://www.jb51.net/article/48516.htm" title="python实现目录树生成示例" target="_blank">python实现目录树生成示例</a></li><li><a href="http://www.jb51.net/article/18485.htm" title="python getopt 参数处理小示例" target="_blank">python getopt 参数处理小示例</a></li><li><a href="http://www.jb51.net/article/59878.htm" title="python操作gmail实例" target="_blank">python操作gmail实例</a></li><li><a href="http://www.jb51.net/article/70331.htm" title="python学习之第三方包安装方法（两种方法）" target="_blank">python学习之第三方包安装方法（两种方法</a></li></ul>
+</div>
+<div class="blank3"></div>
+<div id="art_2"><script type="text/javascript">dy("r2");</script></div>
+<div class="blank3"></div>
+<div class="r_title"><h6>热 点 排 行</h6></div>
+<div class="hotContent">
+<ul class="toplist"><li class="light"><span class="r_num">1</span><a href="http://www.jb51.net/article/926.htm" title="Python入门教程 超详细1小时学会Python" target="_blank">Python入门教程 超详细1小时学会</a></li><li class="light"><span class="r_num">2</span><a href="http://www.jb51.net/article/26543.htm" title="python 中文乱码问题深入分析" target="_blank">python 中文乱码问题深入分析</a></li><li class="light"><span class="r_num">3</span><a href="http://www.jb51.net/article/15707.htm" title="比较详细Python正则表达式操作指南(re使用)" target="_blank">比较详细Python正则表达式操作指</a></li><li><span class="r_num">4</span><a href="http://www.jb51.net/article/17560.htm" title="Python字符串的encode与decode研究心得乱码问题解决方法" target="_blank">Python字符串的encode与decode研</a></li><li><span class="r_num">5</span><a href="http://www.jb51.net/article/34998.htm" title="python 字符串split的用法分享" target="_blank">python 字符串split的用法分享</a></li><li><span class="r_num">6</span><a href="http://www.jb51.net/article/37287.htm" title="python strip()函数 介绍" target="_blank">python strip()函数 介绍</a></li><li><span class="r_num">7</span><a href="http://www.jb51.net/article/15709.htm" title="Python open读写文件实现脚本" target="_blank">Python open读写文件实现脚本</a></li><li><span class="r_num">8</span><a href="http://www.jb51.net/article/47978.htm" title="Python 列表(List)操作方法详解" target="_blank">Python 列表(List)操作方法详解</a></li><li><span class="r_num">9</span><a href="http://www.jb51.net/article/15715.htm" title="Python enumerate遍历数组示例应用" target="_blank">Python enumerate遍历数组示例应</a></li><li><span class="r_num">10</span><a href="http://www.jb51.net/article/21007.htm" title="python 文件和路径操作函数小结" target="_blank">python 文件和路径操作函数小结</a></li></ul>
+</div>
+<div class="blank3"></div>
+<div id="art_3"><script type="text/javascript">dy("r3");</script></div>
+<div class="blank3"></div>
+<div id="baidu300"><script type="text/javascript">dy("baidu300_2");</script></div>
+</div><!--end mainr-->
+<div class="clear"></div>
+</div><!--end main2-->
+</div>
+<div class="blank3"></div>
+
+<div id="footer">
+  <div id="footerinfo">
+   <div id="footercontent"><a href="http://www.jb51.net/about.htm" target="_blank">关于我们</a> - <a href="http://www.jb51.net/support.htm" target="_blank">广告合作</a> - <a href="http://www.jb51.net/linkus.htm" target="_blank">联系我们</a> -  <a href="http://www.jb51.net/sm.htm" target="_blank">免责声明</a> -  <a href="http://www.jb51.net/sitemap.htm" target="_blank">网站地图</a> - <a href="tencent://message/?uin=461478385&Site=http://www.jb51.net" target="_blank">投诉建议</a> - <a href="http://www.jb51.net/up.htm" target="_blank">在线投稿</a></div>
+    <div id="footercopyrights">CopyRight &#169; 2006-2015 <a href="http://www.jb51.net/">脚本之家</a> JB51.Net , All Rights Reserved</div>
+  </div>
+  <div class="ewm"><img alt="脚本之家官方微信" src="./builtin模块常用方法_files/weixin_jb51.gif"></div>
+</div>
+<!-- Baidu Button BEGIN -->
+<div id="logo_m_tp"><script type="text/javascript">dy("logo_m");</script></div>
+<div id="logo_r_tp"><script type="text/javascript">dy("logo_r");</script></div>
+<div id="tonglan1_tp"><script type="text/javascript">dy("tonglan1");</script></div>
+<script type="text/javascript" src="./builtin模块常用方法_files/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./builtin模块常用方法_files/foot.js"></script>
+<script type="text/javascript" src="./builtin模块常用方法_files/shCore.js"></script>
+<script type="text/javascript" src="./builtin模块常用方法_files/shAutoloader.js"></script>
+<script type="text/javascript"> 
+SyntaxHighlighter.autoloader(
+	'applescript			/jslib/syntaxhighlighter/scripts/shBrushAppleScript.js',
+	'actionscript3 as3		/jslib/syntaxhighlighter/scripts/shBrushAS3.js',
+	'bash shell				/jslib/syntaxhighlighter/scripts/shBrushBash.js',
+	'coldfusion cf			/jslib/syntaxhighlighter/scripts/shBrushColdFusion.js',
+	'cpp c					/jslib/syntaxhighlighter/scripts/shBrushCpp.js',
+	'obj-c objc				/jslib/syntaxhighlighter/scripts/shBrushObjC.js',
+	'c# c-sharp csharp		/jslib/syntaxhighlighter/scripts/shBrushCSharp.js',
+	'css					/jslib/syntaxhighlighter/scripts/shBrushCss.js',
+	'delphi pascal			/jslib/syntaxhighlighter/scripts/shBrushDelphi.js',
+	'diff patch pas			/jslib/syntaxhighlighter/scripts/shBrushDiff.js',
+	'erl erlang				/jslib/syntaxhighlighter/scripts/shBrushErlang.js',
+	'groovy					/jslib/syntaxhighlighter/scripts/shBrushGroovy.js',
+	'haxe hx				/jslib/syntaxhighlighter/scripts/shBrushHaxe.js',
+	'java					/jslib/syntaxhighlighter/scripts/shBrushJava.js',
+	'jfx javafx				/jslib/syntaxhighlighter/scripts/shBrushJavaFX.js',
+	'js jscript javascript	/jslib/syntaxhighlighter/scripts/shBrushJScript.js',
+	'perl pl				/jslib/syntaxhighlighter/scripts/shBrushPerl.js',
+	'php					/jslib/syntaxhighlighter/scripts/shBrushPhp.js',
+	'text plain				/jslib/syntaxhighlighter/scripts/shBrushPlain.js',
+	'py python				/jslib/syntaxhighlighter/scripts/shBrushPython.js',
+	'ruby rails ror rb		/jslib/syntaxhighlighter/scripts/shBrushRuby.js',
+	'scala					/jslib/syntaxhighlighter/scripts/shBrushScala.js',
+	'sql					/jslib/syntaxhighlighter/scripts/shBrushSql.js',
+	'vb vbnet				/jslib/syntaxhighlighter/scripts/shBrushVb.js',
+	'ps powershell			/jslib/syntaxhighlighter/scripts/shBrushPowerShell.js',
+	'xml xhtml xslt html	/jslib/syntaxhighlighter/scripts/shBrushXml.js'
+);
+SyntaxHighlighter.all();
+</script>
+<div class="tongji"><script type="text/javascript" src="http://img.jb51.net/inc/tongji.js"></script></div>
+<script charset="utf-8" type="text/javascript" src="./builtin模块常用方法_files/changyan.js"></script>
+<script type="text/javascript">
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+window.changyan.api.config({
+        appid: 'cyrHH3dwi',
+        conf: 'prod_1dc5dc80970106099d43fe242b7465fc'
+    });
+</script>
+<script type="text/javascript" src="./builtin模块常用方法_files/pl.asp"></script>
+
+
+<!-- published at 2015-10-1 2:14:28By dxycms qq:461478385  -->
+</body></html>

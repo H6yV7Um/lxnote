@@ -1,0 +1,117 @@
+* 装饰器的概念
+装饰器就是函数操作器，函数进，函数出.
+* 不带参数的装饰器
+
+fn－－－函数
+fn=f(fn)
+这个f就是装饰器，写法为：
+@f
+fn
+<<
+def simple(*args):
+    for arg in args:
+        print(arg,end=" ")
+
+def logit(func):
+    def wrapper(*args, **kwargs):
+        print("\n")
+        print('function %s called with args %s' % (func, args),end="\n")
+        func(*args, **kwargs)
+    wrapper.__name__=func.__name__
+    return wrapper
+
+@logit
+def simple2(*args):
+    for arg in args:
+        print(arg,end=" ")
+        
+simple(1,2,3,4)
+simple=logit(simple)
+
+simple(1,2,3,4)
+simple2(1,2,3,4)
+
+>>
+<<
+> > > 
+1 2 3 4 
+
+function <function simple at 0x013214B0> called with args (1, 2, 3, 4)
+1 2 3 4 
+
+function <function simple2 at 0x017AD390> called with args (1, 2, 3, 4)
+1 2 3 4 
+>>
+
+* 带参数的装饰器
+fn=f(fn)
+@f,要变成@g(x,y),实际就是f=g(x,y)
+fn=[g(x,y)](fn)
+
+这样的数学表达式如何用程序语言来写呢：
+fn=f(fn)-----> def f: return fn
+f=g(x,y)-----> def g: return f
+得到带参数的装饰器的原型：
+<<
+def g(x,y):
+    def f():
+        def fn():
+            pass
+        return fn
+    return f
+>>
+
+<<
+def makeHtmlTag(tag, *args, **kwds):
+    def real_decorator(fn):
+        css_class = " class='{0}'".format(kwds["css_class"]) \
+                                     if "css_class" in kwds else ""
+        def wrapped(*args, **kwds):
+            return "<"+tag+css_class+">" + fn(*args, **kwds) + "</"+tag+">"
+        return wrapped
+    return real_decorator
+ 
+@makeHtmlTag(tag="b", css_class="bold_css")
+@makeHtmlTag(tag="i", css_class="italic_css")
+def hello():
+    return "hello world"
+ 
+print hello()
+ 
+# 输出：
+# <b class='bold_css'><i class='italic_css'>hello world</i></b>
+>>
+
+* 例子
+这个例实在是太经典了，整个网上都用这个例子做decorator的经典范例，因为太经典了，所以，我这篇文章也不能免俗。
+<<
+from functools import wraps
+def memo(fn):
+    cache = {}
+    miss = object()
+ 
+    @wraps(fn)
+    def wrapper(*args):
+        result = cache.get(args, miss)
+	**_# dict的get方法，如果没有对应的key就返回miss物体_**
+        if result is miss:
+            result = fn(*args)
+            cache[args] = result
+        return result
+ 
+    return wrapper
+ 
+@memo
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+>>
+
+上面这个例子中，是一个斐波拉契数例的递归算法。我们知道，这个递归是相当没有效率的，因为会重复调用。比如：我们要计算fib(5)，于是其分解成fib(4) + fib(3)，而fib(4)分解成fib(3)+fib(2)，fib(3)又分解成fib(2)+fib(1)…… 你可看到，基本上来说，fib(3), fib(2), fib(1)在整个递归过程中被调用了两次。
+
+而我们用decorator，在调用函数前查询一下缓存，如果没有才调用了，有了就从缓存中返回值。一下子，这个递归从二叉树式的递归成了线性的递归。
+
+
+
+

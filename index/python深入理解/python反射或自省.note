@@ -1,0 +1,72 @@
+* 所谓反射
+就是对自身内部的审视，比如有哪些模块，方法，类，函数，变量等等，都能实时的知道。
+* 查询一切help
+<p>**help**
+** 内置函数
+help(getattr)
+** 自定义函数
+help(xxx)
+** 自定义类
+help(Bird)
+help(bb) # 类实例
+
+** 模块
+   help('__main__')
+* 判断实例的类型
+基本形式
+isinstance(obj,basestring)
+元组的几何形式，是否在其中
+isinstance(obj,(str,unicode))
+
+<<
+> > > isinstance(pp,Chicken)
+True
+> > > isinstance(pp,Bird)
+True
+> > > isinstance(pp,object)
+True
+> > > isinstance(pp,(Chicken,int))
+True
+> > > isinstance(pp,(float,int))
+False
+>>
+* 判断是否有属性
+
+可以判断属性
+print(hasattr(pp,'age'))
+也可以判断方法
+print(hasattr(pp,'isAdult'))
+可以设定默认值，即使没有也不会出现错误
+getattr(bb,'write',123)
+* type函数建立新类型
+type(object_or_name, bases, dict)
+type(object) -> the object's type
+type(name, bases, dict) -> a new type
+<<
+> > > Point=type('Point',(object,),{'x':0,'y':0})
+> > > p=Point()
+> > > def init(self,x,y):
+  self.x,self.y=x,y
+> > > Point.__init__=init
+> > > p2=Point(6,8)
+> > > print p2
+(6,8)
+>>
+* locals/globals/vars/dir
+vars()==locals()，vars(obj)==obj.__dict__
+** locals()取得本地各种信息
+** globals()全局信息
+* issubclass(bool,int)==True
+* iter函数
+> > > def getrand():
+  import random
+  return random.randint(1,100)
+> > > for i in iter(getrand,50):print i,#获取第一次得到50之前的所有1-100的随机数
+* enumerate函数
+<<
+> > > for i,name in enumerate(['C','C++','CSharp','Java','Python'],1):
+  print '%d.%s'%(i,name)
+>>
+* 链接文章
+如下：;;
+<p><A HREF="python反射或自省.files/Python自省（反射）指南-AstralWind.html">----Python自省（反射）指南-AstralWind----</A>

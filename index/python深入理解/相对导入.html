@@ -1,0 +1,258 @@
+
+
+<!-- ********************************************************************************************** -->
+<!-- ********************************************************************************************** -->
+
+
+<!-- ------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+<HTML>
+	<!-- head----------------------------------------------------------------------- -->
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" /> 
+	<HEAD>
+	  <TITLE> 相对导入 2015-10-21 [WEDNESDAY]</TITLE>
+		<STYLE TYPE="text/css">
+			<!-- 
+				.heiti{font-family:"黑体";}
+				.small{font-family:"黑体";font-size:10pt;margin-right:0}
+				.marginleft{margin-left:6em;margin-right:6em;margin-top:6em}
+                
+				p{font-family:"宋体";font-size:9pt;margin-right:1em;margin-left:2em;color:#333333;line-height:18pt; text-indent:2em   }
+                
+                  
+               
+                
+				#col{position:absolute;right:100px;top:390px;width:350;
+					 height:90%;background-color:#ffffff;z-index:0;overflow:auto;color:#666666}
+				PRE{font-size:10pt;margin-right:3em;margin-left:3em;color:#5500ee;line-height:15pt;border:dashed 1px blue;padding:10px}
+				DD{font-size:10pt;margin-right:0em;margin-left:1em;color:#aa0000;line-height:18pt;}
+				DT{font-size:10pt;margin-right:0em;margin-left:1em;color:#666666;line-height:18pt}
+				TD{font-size:10pt;color:#aa0000;float:left}
+				A{text-decoration:none}
+                LI{color:#885500;margin-left:1em;line-height:24pt;}
+                
+                
+                TABLE{cellspacing:0;border-width:2px; border-style:dashed; cellpadding:15;bgcolor:#ffffff;bordercolor:#888888;}
+                HR{border-width:5px;border-style:solid;bordercolor:#999999}
+				H1{margin-left:1em;font-size:13pt;}
+				H2{margin-left:2em;font-size:11pt;}
+                H3{margin-left:3em;font-size:9pt;color:#008888}
+				#key{font-family:"宋体";color:#66aa11;font-size:15pt}
+                #under_line{border:solid 1px red;padding-bottom: 0.3em;padding-top: 0.3em;}
+                #through_line{text-decoration:line-through;color:#aaaaaa}
+                
+			-->
+		</STYLE>
+		
+	</HEAD>
+	<!-- body----------------------------------------------------------------------- -->
+	<BODY class="marginleft">	 
+		<H1 class="heiti" style="color:#CCCCCC;font-size:30pt"><A name="index">相对导入</A> </H1> 
+        <p align="right">
+            <b class="heiti" style="color:#DDDDDD">
+                2015-10-21  [WEDNESDAY]
+            </b>
+        </p>
+        <b style="color:#666666" class="heiti"><A HREF=../>&gt;&gt;&gt;&nbsp;GO UP</A> </b>
+		<HR align="left" >
+            <b class="heiti" style="color:#009900;font-size:13pt">
+              
+                <a href="#直接运行_or_import">直接运行_or_import</a> | <a href="#模块的名字如何得来">模块的名字如何得来</a> | <a href="#无法相对导入relative_imports">无法相对导入relative_imports</a> | <a href="#模块名字含有"-"特殊导入">模块名字含有"-"特殊导入</a> | <a href="#自定义模块名">自定义模块名</a> | <a href="#小结">小结</a>||<a href="#links:">links:</a>
+              
+            
+            
+             
+            </b>
+			  
+		<HR align="left">
+        <BR><BR>
+		  
+		  
+					
+		
+		<UL style="margin-left:0.5em">
+		
+		
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="直接运行_or_import">直接运行_or_import</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>简单地说，直接运行.Py文件和import这个文件有很大区别。Python解释器判断一个py文件属于哪个package时<span id="under_line">并不完全由该文件所在的文件夹决定</span>。它<span id="under_line">还取决于这个文件是如何load进来的</span>（直接运行or import）。
+<p>有两种方式加载一个py文件：作为top-level脚本或者作为module。前者指的是直接运行脚本，比如
+<PRE>python myfile.py</PRE>
+<p>如果执行
+<PRE>python -m myfile</PRE>
+<p>或者在其它py文件中用import语句来加载，那么它就会被当作一个module。
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="模块的名字如何得来">模块的名字如何得来</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>有且只能有一个top-level脚本，就是最开始执行的那个（比如python myfile.py中的myfile.py，译者注）。
+<p>当一个py文件被加载之后，它会被赋予一个名字，保存在__name__属性中。如果是top-level脚本，<span id="under_line">那么名字就是__main__</span>。如果是作为module，名字就是把它所在的
+<p> <b id="key">packages/subpackages和文件名用.连接起来</b>。
+<p>例如，
+<PRE>
+package/
+
+    __init__.py
+
+    subpackage1/
+
+        __init__.py
+
+        moduleX.py
+
+        moduleY.py
+
+    subpackage2/
+
+        __init__.py
+
+        moduleZ.py
+</PRE> 
+<p>
+<p>moduleA.pymoduleX被import进来，它的名字就是package.subpackage1.moduleX。如果import了moduleA，它的名字是package.moduleA。如果直接运行moduleX或moduleA，那么名字就都是__main__了。
+<p>一个特例是直接运行python REPL，这个REPL的session的名字是__main__。
+<p>关于你遇到的错误信息，关键点来了：<b id="key">如果一个module的名字中没有点（即package.subpackage1中的那个点，译者注），那么它就被认为不属于任何一个package。文件在磁盘上的位置在哪里都不影响，唯一起决定作用的就是module的名字，而这又取决于它是如何被加载的。</b>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="无法相对导入relative_imports">无法相对导入relative_imports</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>relative import使用module的名字来决定它是否属于一个package，属于哪个package。当你使用这种relative import from .. import foo，其中的点的数量代表了package结构中的某个层次。例如，如果当前module的名字是package.subpackage1.moduleX，那么..moduleA代表package.moduleA。为了让形如from .. import的这种导入能够正常工作，<b id="key">module的名字里的点数量应当至少和import语句中一样多</b>。
+<H2>解决方法
+</H2><p>（无法相对导入的问题）有两个解决方法。如果你真的想直接运行moduleX，同时又希望它被当作所在package的一部分，可以这么做：
+<PRE>python -m package.subpackage.moduleX</PRE>
+<p>-m参数告诉Python解释器，把这个文件当作一个module载入，而不是top-level脚本。
+<p>如果你并不想直接运行moduleX，而是想在另一个文件比如myfile.py中使用moduleX中定义的函数，那么解决方法是把myfile.py文件挪到另一个地方，只要不在moduleX所属的package的文件夹里就行。然后在myfile.py中执行from package.moduleA import spam，就能正常工作了。
+<p>注意，不论哪种解决方案，都需要package的路径（上文中的package）在python的搜索路径也就是sys.path里。如果不在，那么就无法使用这个package中的任何文件。
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="模块名字含有"-"特殊导入">模块名字含有"-"特殊导入</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>__import__("mod-master.pp")
+<p>或
+<p>import importlib
+<p>mod = importlib.import_module("test.pk1-3.B")
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="自定义模块名">自定义模块名</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<PRE>
+# monkey patch the sverchok name, I am sure there is a better way to do this.
+if __name__ != "sverchok":
+    sys.modules["sverchok"] = sys.modules[__name__] 
+</PRE>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="小结">小结</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>
+<p><ol>
+<p><ol>
+<p><li>模块导入时，python系统从sys.path对应搜索路径查找模块。
+<p><li>先当前，在sys.path,再builtin？
+<p><li>如果能匹配上，就生成模块名__name__
+<p><li>绝对导入直接写模块全名没问题
+<p><li>相对导入实质不过是字符操作，比如:<br>mod.__name__为"A.B.C.D"<br>from ..mod import some就是<br>from ..A.B.C.D import some消去点---->from A.B 
+<p>
+<p></ol>
+<p></ol>
+<p>
+<p>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+		</UL>
+		<HR align="left"  style="border-width:2px">
+		
+		<H5 class="heiti" style="color:#555599"><a name=links:>links:</a></H5>	
+		
+		
+				 
+							
+							
+							<P><A HREF="./相对导入.files/Python _ 如何获得Python脚本所在目录的位置 _ Elias的个人主页.html">Python _ 如何获得Python脚本所在目录的位置 _ Elias的个人主页</A>
+							<BR>
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+		
+
+		<A HREF="#index"><CENTER><P style="color:#ff3300">[GO to index]</CENTER></A>
+	</BODY>
+	<!-- ----------------------------------------------------------------------- -->
+<!-- **keywords="直接运行_or_import|模块的名字如何得来|无法相对导入relative_imports|模块名字含有"-"特殊导入|自定义模块名|小结" -->
+<!-- **refs="Python _ 如何获得Python脚本所在目录的位置 _ Elias的个人主页|Python _ 如何获得Python脚本所在目录的位置 _ Elias的个人主页_files|test" -->
+</HTML>
+<!-- -------------------------------------------------------------------------------- -->
+<script ></script>

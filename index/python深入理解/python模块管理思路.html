@@ -1,0 +1,298 @@
+
+
+<!-- ********************************************************************************************** -->
+<!-- ********************************************************************************************** -->
+
+
+<!-- ------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+<HTML>
+	<!-- head----------------------------------------------------------------------- -->
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" /> 
+	<HEAD>
+	  <TITLE> python模块管理思路 2015-10-20 [TUESDAY]</TITLE>
+		<STYLE TYPE="text/css">
+			<!-- 
+				.heiti{font-family:"黑体";}
+				.small{font-family:"黑体";font-size:10pt;margin-right:0}
+				.marginleft{margin-left:6em;margin-right:6em;margin-top:6em}
+                
+				p{font-family:"宋体";font-size:9pt;margin-right:1em;margin-left:2em;color:#333333;line-height:18pt; text-indent:2em   }
+                
+                  
+               
+                
+				#col{position:absolute;right:100px;top:390px;width:350;
+					 height:90%;background-color:#ffffff;z-index:0;overflow:auto;color:#666666}
+				PRE{font-size:10pt;margin-right:3em;margin-left:3em;color:#5500ee;line-height:15pt;border:dashed 1px blue;padding:10px}
+				DD{font-size:10pt;margin-right:0em;margin-left:1em;color:#aa0000;line-height:18pt;}
+				DT{font-size:10pt;margin-right:0em;margin-left:1em;color:#666666;line-height:18pt}
+				TD{font-size:10pt;color:#aa0000;float:left}
+				A{text-decoration:none}
+                LI{color:#885500;margin-left:1em;line-height:24pt;}
+                
+                
+                TABLE{cellspacing:0;border-width:2px; border-style:dashed; cellpadding:15;bgcolor:#ffffff;bordercolor:#888888;}
+                HR{border-width:5px;border-style:solid;bordercolor:#999999}
+				H1{margin-left:1em;font-size:13pt;}
+				H2{margin-left:2em;font-size:11pt;}
+                H3{margin-left:3em;font-size:9pt;color:#008888}
+				#key{font-family:"黑体";color:#66aa11;font-size:15pt}
+                #under_line{border:solid 1px red;padding-bottom: 0.3em;padding-top: 0.3em;}
+                #through_line{text-decoration:line-through;color:#aaaaaa}
+                
+			-->
+		</STYLE>
+		
+	</HEAD>
+	<!-- body----------------------------------------------------------------------- -->
+	<BODY class="marginleft">	 
+		<H1 class="heiti" style="color:#CCCCCC;font-size:30pt"><A name="index">python模块管理思路</A> </H1> 
+        <p align="right">
+            <b class="heiti" style="color:#DDDDDD">
+                2015-10-20  [TUESDAY]
+            </b>
+        </p>
+        <b style="color:#666666" class="heiti"><A HREF=../>&gt;&gt;&gt;&nbsp;GO UP</A> </b>
+		<HR align="left" >
+            <b class="heiti" style="color:#009900;font-size:13pt">
+              
+                <a href="#模块的概念">模块的概念</a> | <a href="#模块加载和重载">模块加载和重载</a> | <a href="#一个py文件就是一个模块">一个py文件就是一个模块</a> | <a href="#一个带__init__.py的目录也是一个模块">一个带__init__.py的目录也是一个模块</a> | <a href="#相对路径">相对路径</a>||<a href="#links:">links:</a>
+              
+            
+            
+             
+            </b>
+			  
+		<HR align="left">
+        <BR><BR>
+		  
+		  
+					
+		
+		<UL style="margin-left:0.5em">
+		
+		
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="模块的概念">模块的概念</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>一个大的应用或程序可以切分为一些小的组件，方便管理和分别处理，同时模块之间可以很好的沟通，这就是模块的作用，和现实中的不同公司、部门的道理是一样的。
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="模块加载和重载">模块加载和重载</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<H2>加载
+</H2><p>简单的import即可。
+<PRE>import A.B.C #A在搜索路径下</PRE>
+<p>import只能导入模块，不能导入模块中的对象（类、函数、变量等）。如一个模块A（A.py）中有个函数getName，另一个模块不能通过import A.getName将getName导入到本模块，只能用import A。如果想只导入特定的类、函数、变量则用
+<PRE>from A import getName</PRE>
+<p>即可。
+<p>
+<H2>加载路径
+</H2><p>sys.path
+<p>python在此路径在搜索模块。如果需要可以添加sys.path.apend
+<H2>模块查询
+</H2><p>sys.modules
+<p>
+<p>
+<H2>重载
+</H2><p>在python3.0中reload函数不是内置的，需要加载
+<PRE>
+from imp import reload
+reload(module)
+</PRE>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="一个py文件就是一个模块">一个py文件就是一个模块</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>模块包含：
+<p>
+<p><ul>
+<p><ul>
+<p><li>函数
+<p><li>全局变量
+<p>
+<p></ul>
+<p></ul>
+
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="一个带__init__.py的目录也是一个模块">一个带__init__.py的目录也是一个模块</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<H2>__path__
+</H2><p>一个带有init文件的文件夹就是一个模块，当这个模块导入后，就有了__path__属性,注意，普通文件的模块是没有这个属性的。
+<PRE>
+&gt; &gt; &gt; import D
+&gt; &gt; &gt; D.__path__
+&gt; &gt; &gt; D.__path__
+['D:\\百度云同步盘\\LxNote\\blender\\5-建筑表现\\node\\python深入理解\\python模块管理思路.files\\D']
+</PRE>
+<p>这个__path__变量可以自定义，比如D.__path__="C:\\",这样，包内的模块就回去修改后的目录寻找。
+<H2>直接使用__path__变量
+</H2><PRE>
+#D\__init__.py
+def ppp():
+    print(__path__)
+</PRE>
+<PRE>
+&gt; &gt; &gt; import D
+&gt; &gt; &gt; D.ppp()
+['D:\\百度云同步盘\\LxNote\\blender\\5-建筑表现\\node\\python深入理解\\python模块管理思路.files\\D']
+</PRE>
+<p>
+<H2>__all__
+</H2><p>这个和__path__类似，可以手工修改，修改后，当用
+<PRE>from D import *</PRE>
+<p>的时候，只会导入__all__指定的部分。
+<p>在Sound/__init__.py中, 写一行:
+<p>__all__=['Effects','Filters','Utils']
+<p>则:
+<PRE>
+&gt; &gt; &gt; from Sound import *
+&gt; &gt; &gt; dir()
+['Effects','Filters','Utils','__builtins__','__doc__','__name__']
+</PRE>
+<p>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="相对路径">相对路径</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p><IMG SRC="./python模块管理思路.files/2015-10-19_121219.png"  HEIGHT=""> </IMG>
+<p>如下几行在__init__.py文件中：
+<PRE>
+from . import developer_utils 
+from bpy.props import *
+from . id_keys import IDKeySettings 
+from ... events import propertyChanged 
+from ... base_types.node import AnimationNode 
+#base_types为文件夹或者说包
+</PRE>
+<p><b id="key">. 表示当前目录</b>
+<p><b id="key">.. 上级目录</b>
+<p><b id="key">.. 上2级目录</b>
+<p>
+<p>
+<p>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+		</UL>
+		<HR align="left"  style="border-width:2px">
+		
+		<H5 class="heiti" style="color:#555599"><a name=links:>links:</a></H5>	
+		
+		
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							<P><A HREF="./python模块管理思路.files/Python 包的相对导入讲解 _ fooStack.htm">Python 包的相对导入讲解 _ fooStack</A>
+							<BR>
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+				 
+							
+							
+				
+			
+		
+
+		<A HREF="#index"><CENTER><P style="color:#ff3300">[GO to index]</CENTER></A>
+	</BODY>
+	<!-- ----------------------------------------------------------------------- -->
+<!-- **keywords="模块的概念|模块加载和重载|一个py文件就是一个模块|一个带__init__.py的目录也是一个模块|相对路径" -->
+<!-- **refs="2015-10-19_121219.png|A.py|B.py|C|D|J|Python 包的相对导入讲解 _ fooStack|Python 包的相对导入讲解 _ fooStack_files|__init__.py|__pycache__" -->
+</HTML>
+<!-- -------------------------------------------------------------------------------- -->
+<script ></script>

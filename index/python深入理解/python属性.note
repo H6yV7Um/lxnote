@@ -1,0 +1,25 @@
+* 类属性和实例属性attribute
+这个好理解。
+在__init__方法中，self.age=2这样的是实例属性。
+* 属性的__dict__系统
+可以用__dict__来查询属性。
+* 属性的层次性
+比如有这样的继承关系object/bird/chicken/summer，属性查询到的只有自身的，上级的查不到。
+可以用bird.__class__.__base__得到上级类。
+
+* 特性property
+<<
+class num(object):
+    def __init__(self, value):
+        self.value = value
+    def getNeg(self):
+        return -self.value
+    def setNeg(self, value):
+        self.value = -value
+    def delNeg(self):
+        print("value also deleted")
+        del self.value
+    neg = property(getNeg, setNeg, delNeg, "I'm negative")
+>>
+property座位内置方法，可以将函数变为动态属性。
+

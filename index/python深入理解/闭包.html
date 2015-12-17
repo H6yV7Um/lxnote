@@ -1,0 +1,160 @@
+
+
+<!-- ********************************************************************************************** -->
+<!-- ********************************************************************************************** -->
+
+
+<!-- ------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+<HTML>
+	<!-- head----------------------------------------------------------------------- -->
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" /> 
+	<HEAD>
+	  <TITLE> 闭包 2015-10-22 [THURSDAY]</TITLE>
+		<STYLE TYPE="text/css">
+			<!-- 
+				.heiti{font-family:"黑体";}
+				.small{font-family:"黑体";font-size:10pt;margin-right:0}
+				.marginleft{margin-left:6em;margin-right:6em;margin-top:6em}
+                
+				p{font-family:"宋体";font-size:9pt;margin-right:1em;margin-left:2em;color:#333333;line-height:18pt; text-indent:2em   }
+                
+                  
+               
+                
+				#col{position:absolute;right:100px;top:390px;width:350;
+					 height:90%;background-color:#ffffff;z-index:0;overflow:auto;color:#666666}
+				PRE{font-size:10pt;margin-right:3em;margin-left:3em;color:#5500ee;line-height:15pt;border:dashed 1px blue;padding:10px}
+				DD{font-size:10pt;margin-right:0em;margin-left:1em;color:#aa0000;line-height:18pt;}
+				DT{font-size:10pt;margin-right:0em;margin-left:1em;color:#666666;line-height:18pt}
+				TD{font-size:10pt;color:#aa0000;float:left}
+				A{text-decoration:none}
+                LI{color:#885500;margin-left:1em;line-height:24pt;}
+                
+                
+                TABLE{cellspacing:0;border-width:2px; border-style:dashed; cellpadding:15;bgcolor:#ffffff;bordercolor:#888888;}
+                HR{border-width:5px;border-style:solid;bordercolor:#999999}
+				H1{margin-left:1em;font-size:13pt;}
+				H2{margin-left:2em;font-size:11pt;}
+                H3{margin-left:3em;font-size:9pt;color:#008888}
+				#key{font-family:"宋体";color:#66aa11;font-size:15pt}
+                #under_line{border:solid 1px red;padding-bottom: 0.3em;padding-top: 0.3em;}
+                #through_line{text-decoration:line-through;color:#aaaaaa}
+                
+			-->
+		</STYLE>
+		
+	</HEAD>
+	<!-- body----------------------------------------------------------------------- -->
+	<BODY class="marginleft">	 
+		<H1 class="heiti" style="color:#CCCCCC;font-size:30pt"><A name="index">闭包</A> </H1> 
+        <p align="right">
+            <b class="heiti" style="color:#DDDDDD">
+                2015-10-22  [THURSDAY]
+            </b>
+        </p>
+        <b style="color:#666666" class="heiti"><A HREF=../>&gt;&gt;&gt;&nbsp;GO UP</A> </b>
+		<HR align="left" >
+            <b class="heiti" style="color:#009900;font-size:13pt">
+              
+                <a href="#闭包的理解">闭包的理解</a>||<a href="#links:">links:</a>
+              
+            
+            
+             
+            </b>
+			  
+		<HR align="left">
+        <BR><BR>
+		  
+		  
+					
+		
+		<UL style="margin-left:0.5em">
+		
+		
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="闭包的理解">闭包的理解</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>简单说来，闭包是函数，并且这个函数有一些绑定的外部自由变量，即使这些自由变量的激活环境已经不存在了。
+<p>例子：
+<PRE>
+def pp():
+    n=3
+    def nnn(num):
+        return num**n
+    return nnn
+
+f=pp()
+del pp  # 删除pp完全没有影响，闭包在函数产生的时候就有了
+def mmm():
+    print(123)
+
+f2=mmm
+
+print("-----------------闭包函数:")
+print(f.__closure__)
+print(type(f.__closure__[0]))
+print(f.__closure__[0].cell_contents)
+print("-----------------普通函数:")
+print(f2.__closure__)
+
+</PRE>
+<PRE>
+&gt; &gt; &gt; 
+-----------------闭包函数:
+(&lt;cell at 0x01329150: int object at 0x1E28BE68&gt;,)
+&lt;class 'cell'&gt;
+3
+-----------------普通函数:
+None
+</PRE>
+<p>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+		</UL>
+		<HR align="left"  style="border-width:2px">
+		
+		<H5 class="heiti" style="color:#555599"><a name=links:>links:</a></H5>	
+		
+		
+				 
+							<P><A HREF="d:\百度云同步盘\LxNote\blender\5-建筑表现\node\python深入理解\闭包.files/ppp.py">[[ ppp.py ]]</A>
+							<BR>
+				
+			
+				 
+							
+							
+							<P><A HREF="./闭包.files/Python Closures Explained _ Shut Up and Ship.html">Python Closures Explained _ Shut Up and Ship</A>
+							<BR>
+				
+			
+				 
+							
+							
+				
+			
+		
+
+		<A HREF="#index"><CENTER><P style="color:#ff3300">[GO to index]</CENTER></A>
+	</BODY>
+	<!-- ----------------------------------------------------------------------- -->
+<!-- **keywords="闭包的理解" -->
+<!-- **refs="ppp.py|Python Closures Explained _ Shut Up and Ship|Python Closures Explained _ Shut Up and Ship_files" -->
+</HTML>
+<!-- -------------------------------------------------------------------------------- -->
+<script ></script>

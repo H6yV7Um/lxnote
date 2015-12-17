@@ -1,0 +1,1 @@
+print("我是 pk2 包 ","name:" ,__name__,"package:" ,__package__)

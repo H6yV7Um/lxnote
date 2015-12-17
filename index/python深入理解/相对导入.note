@@ -1,0 +1,62 @@
+* 直接运行_or_import
+简单地说，直接运行.Py文件和import这个文件有很大区别。Python解释器判断一个py文件属于哪个package时**_并不完全由该文件所在的文件夹决定_**。它**_还取决于这个文件是如何load进来的_**（直接运行or import）。
+有两种方式加载一个py文件：作为top-level脚本或者作为module。前者指的是直接运行脚本，比如
+<<python myfile.py>>
+如果执行
+<<python -m myfile>>
+或者在其它py文件中用import语句来加载，那么它就会被当作一个module。
+* 模块的名字如何得来
+有且只能有一个top-level脚本，就是最开始执行的那个（比如python myfile.py中的myfile.py，译者注）。
+当一个py文件被加载之后，它会被赋予一个名字，保存在__name__属性中。如果是top-level脚本，**_那么名字就是__main___**。如果是作为module，名字就是把它所在的
+ **packages/subpackages和文件名用.连接起来**。
+例如，
+<<
+package/
+
+    __init__.py
+
+    subpackage1/
+
+        __init__.py
+
+        moduleX.py
+
+        moduleY.py
+
+    subpackage2/
+
+        __init__.py
+
+        moduleZ.py
+>> 
+
+moduleA.pymoduleX被import进来，它的名字就是package.subpackage1.moduleX。如果import了moduleA，它的名字是package.moduleA。如果直接运行moduleX或moduleA，那么名字就都是__main__了。
+一个特例是直接运行python REPL，这个REPL的session的名字是__main__。
+关于你遇到的错误信息，关键点来了：**如果一个module的名字中没有点（即package.subpackage1中的那个点，译者注），那么它就被认为不属于任何一个package。文件在磁盘上的位置在哪里都不影响，唯一起决定作用的就是module的名字，而这又取决于它是如何被加载的。**
+* 无法相对导入relative_imports
+relative import使用module的名字来决定它是否属于一个package，属于哪个package。当你使用这种relative import from .. import foo，其中的点的数量代表了package结构中的某个层次。例如，如果当前module的名字是package.subpackage1.moduleX，那么..moduleA代表package.moduleA。为了让形如from .. import的这种导入能够正常工作，**module的名字里的点数量应当至少和import语句中一样多**。
+** 解决方法
+（无法相对导入的问题）有两个解决方法。如果你真的想直接运行moduleX，同时又希望它被当作所在package的一部分，可以这么做：
+<<python -m package.subpackage.moduleX>>
+-m参数告诉Python解释器，把这个文件当作一个module载入，而不是top-level脚本。
+如果你并不想直接运行moduleX，而是想在另一个文件比如myfile.py中使用moduleX中定义的函数，那么解决方法是把myfile.py文件挪到另一个地方，只要不在moduleX所属的package的文件夹里就行。然后在myfile.py中执行from package.moduleA import spam，就能正常工作了。
+注意，不论哪种解决方案，都需要package的路径（上文中的package）在python的搜索路径也就是sys.path里。如果不在，那么就无法使用这个package中的任何文件。
+* 模块名字含有"-"特殊导入
+__import__("mod-master.pp")
+或
+import importlib
+mod = importlib.import_module("test.pk1-3.B")
+* 自定义模块名
+<<
+# monkey patch the sverchok name, I am sure there is a better way to do this.
+if __name__ != "sverchok":
+    sys.modules["sverchok"] = sys.modules[__name__] 
+>>
+* 小结
+++ 模块导入时，python系统从sys.path对应搜索路径查找模块。
+++ 先当前，在sys.path,再builtin？
+++ 如果能匹配上，就生成模块名__name__
+++ 绝对导入直接写模块全名没问题
+++ 相对导入实质不过是字符操作，比如:;;mod.__name__为"A.B.C.D";;from ..mod import some就是;;from ..A.B.C.D import some消去点---->from A.B 
+
+

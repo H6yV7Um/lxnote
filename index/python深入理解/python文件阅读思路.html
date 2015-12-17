@@ -1,0 +1,162 @@
+
+
+<!-- ********************************************************************************************** -->
+<!-- ********************************************************************************************** -->
+
+
+<!-- ------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------------- -->
+<HTML>
+	<!-- head----------------------------------------------------------------------- -->
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" /> 
+	<HEAD>
+	  <TITLE> python文件阅读思路 2015-10-19 [MONDAY]</TITLE>
+		<STYLE TYPE="text/css">
+			<!-- 
+				.heiti{font-family:"黑体";}
+				.small{font-family:"黑体";font-size:10pt;margin-right:0}
+				.marginleft{margin-left:6em;margin-right:6em;margin-top:6em}
+                
+				p{font-family:"宋体";font-size:9pt;margin-right:1em;margin-left:2em;color:#333333;line-height:18pt; text-indent:2em   }
+                p:first-letter{/*color: #FF0000;*/font-size:9pt;}
+                  
+               
+                
+				#col{position:absolute;right:100px;top:390px;width:350;
+					 height:90%;background-color:#ffffff;z-index:0;overflow:auto;color:#666666}
+				PRE{font-size:10pt;margin-right:3em;margin-left:3em;color:#5500ee;line-height:15pt;border:dashed 1px blue;padding:10px}
+				DD{font-size:10pt;margin-right:0em;margin-left:1em;color:#aa0000;line-height:18pt;}
+				DT{font-size:10pt;margin-right:0em;margin-left:1em;color:#666666;line-height:18pt}
+				TD{font-size:10pt;color:#aa0000;float:left}
+				A{text-decoration:none}
+                LI{color:#885500;margin-left:1em;line-height:24pt;}
+                
+                
+                TABLE{cellspacing:0;border-width:2px; border-style:dashed; cellpadding:15;bgcolor:#ffffff;bordercolor:#888888;}
+                HR{border-width:5px;border-style:solid;bordercolor:#999999}
+				H1{margin-left:1em;font-size:13pt;}
+				H2{margin-left:2em;font-size:11pt;}
+                H3{margin-left:3em;font-size:9pt;color:#008888}
+				#key{font-family:"黑体";color:#66aa11;font-size:15pt}
+                #under_line{border:solid 1px red;padding-bottom: 0.3em;padding-top: 0.3em;}
+                #through_line{text-decoration:line-through;color:#aaaaaa}
+                
+			-->
+		</STYLE>
+		
+	</HEAD>
+	<!-- body----------------------------------------------------------------------- -->
+	<BODY class="marginleft">	 
+		<H1 class="heiti" style="color:#CCCCCC;font-size:30pt"><A name="index">python文件阅读思路</A> </H1> 
+        <p align="right">
+            <b class="heiti" style="color:#DDDDDD">
+                2015-10-19  [MONDAY]
+            </b>
+        </p>
+        <b style="color:#666666" class="heiti"><A HREF=../>&gt;&gt;&gt;&nbsp;GO UP</A> </b>
+		<HR align="left" >
+            <b class="heiti" style="color:#009900;font-size:13pt">
+              
+                <a href="#文件内部结构">文件内部结构</a> | <a href="#文件夹组织关系">文件夹组织关系</a> | <a href="#理解python基本模块和概念">理解python基本模块和概念</a>||<a href="#links:">links:</a>
+              
+            
+            
+             
+            </b>
+			  
+		<HR align="left">
+        <BR><BR>
+		  
+		  
+					
+		
+		<UL style="margin-left:0.5em">
+		
+		
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="文件内部结构">文件内部结构</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>首先观其大略，有几个类，几个函数，加载了哪些模块。
+<p>然后一个个分解来看：
+<H2>函数
+</H2><p>一句句看明白，理解数据的变化
+<H2>类
+</H2><p>首先理解类的含义，到底是什么东西的抽象。
+<p>明白继承关系
+<p>初始化方法
+<p>成员属性
+<p>成员方法
+<p>
+<H2>模块
+</H2><p>在本文件找不到的函数要到模块去找，
+<p>根据LEGB法则寻找标识符。
+<p>
+<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="文件夹组织关系">文件夹组织关系</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+				
+				
+					<LI><H1 class="heiti" style="color:#666666"><a name="理解python基本模块和概念">理解python基本模块和概念</a></H1>	
+						<TABLE >
+						
+						<TD>
+						<BR><BR>
+						<p>
+<p><ol>
+<p><ol>
+<p><li>传值引用等
+<p><li>defaultdict()方法
+<p><li>__name__=="__main__"
+<p><li>
+<p>
+<p></ol>
+<p></ol>
+
+                        <A HREF="#index"><P style="color:#ff3300">[Index]</A><BR><BR>
+						</TD>
+						
+						</TABLE>
+						<BR><BR><BR><BR>
+				
+		</UL>
+		<HR align="left"  style="border-width:2px">
+		
+		<H5 class="heiti" style="color:#555599"><a name=links:>links:</a></H5>	
+		
+		
+		
+
+		<A HREF="#index"><CENTER><P style="color:#ff3300">[GO to index]</CENTER></A>
+	</BODY>
+	<!-- ----------------------------------------------------------------------- -->
+<!-- **keywords="文件内部结构|文件夹组织关系|理解python基本模块和概念" -->
+<!-- **refs="" -->
+</HTML>
+<!-- -------------------------------------------------------------------------------- -->
+<script ></script>

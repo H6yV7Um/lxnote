@@ -1,0 +1,756 @@
+
+<HTML>
+	<!-- head----------------------------------------------------------------------- -->
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" /> 
+	<HEAD>
+	  <TITLE>  python深入理解</TITLE>
+		<STYLE TYPE="text/css">
+			<!-- 
+				.heiti{font-family:'黑体';}
+				.small{font-size:10pt}
+				.marginleft{margin-left:4em}
+				p{font-size:10pt;margin-right:0em;margin-left:0em;color:#008800;line-height:18pt}
+				#col{position:absolute;left:600px;top:270px;width:300;
+					 height:5400;background-color:#ffffff;z-index:-1}
+				PRE{font-size:10pt;margin-right:30em;margin-left:3em;color:#aa0000;line-height:18pt}
+				LI{font-size:10pt;margin-right:0em;margin-left:-1.5em;color:#444444;line-height:15pt}
+			
+				TD{color:#aa0000}
+				A{text-decoration:none}
+			-->
+		</STYLE>
+		
+	</HEAD>
+	
+	<BODY class="marginleft">	 
+		<H1 class="heiti" style="color:#CCCCCC;font-size:30pt">python深入理解 </H1> 
+        <b style="color:#666666" class="heiti"><A HREF=../index.html>-&gt;&nbsp;go up</A> </b>
+		<HR style="color:#eeeeee">
+				  <P class="small" style="color:#666666;font-size:8pt">
+				  Index make time: 2015-12-17 15:14     [THURSDAY]
+				  </P>
+		<HR style="color:#eeeeee"><BR><BR><BR>
+		<TABLE cellspacing=30 border=5 bordercolor="#ffaa00">
+            
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                           
+                            
+                             <TR>
+                            <TD valign=top>				
+                                    
+                                    <P>&nbsp;&nbsp;
+                                    <A class="heiti"  style="font-size:13pt" HREF="./python深入理解/python反射或自省.html">
+                                    python反射或自省
+                                    </A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                  
+                                    <BR>
+                                    
+                                    <!-- 这里加入day模板的index部分 -->
+                                    
+                                        
+                                        
+                                        <UL>
+                                            
+                                                <LI>所谓反射 
+                                            
+                                                <LI>查询一切help 
+                                            
+                                                <LI>判断实例的类型 
+                                            
+                                                <LI>判断是否有属性 
+                                            
+                                                <LI>type函数建立新类型 
+                                            
+                                                <LI>locals/globals/vars/dir 
+                                            
+                                                <LI>issubclass(bool,int)==True 
+                                            
+                                                <LI>iter函数 
+                                            
+                                                <LI>enumerate函数 
+                                            
+                                                <LI>链接文章 
+                                            
+                                        </UL>
+                                    
+                                        <UL>
+                                            
+                                                
+                                                <LI>.....ref.....builtin模块常用方法 
+                                            
+                                                
+                                                <LI>.....ref.....builtin模块常用方法_files 
+                                            
+                                                
+                                                <LI>.....ref.....Python自省（反射）指南-AstralWind 
+                                            
+                                                
+                                                <LI>.....ref.....Python自省（反射）指南-AstralWind_files 
+                                            
+                                        </UL>
+                                    
+
+                            </TD>	
+                            
+                                    
+                                    
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                           
+                            
+                            
+                            <TD valign=top>				
+                                    
+                                    <P>&nbsp;&nbsp;
+                                    <A class="heiti"  style="font-size:13pt" HREF="./python深入理解/python命名空间.html">
+                                    python命名空间
+                                    </A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                  
+                                    <BR>
+                                    
+                                    <!-- 这里加入day模板的index部分 -->
+                                    
+                                        
+                                        
+                                        <UL>
+                                            
+                                                <LI>LEGB法则 
+                                            
+                                        </UL>
+                                    
+                                        <UL>
+                                            
+                                                
+                                                <LI>.....ref.....2015-10-19_142808.png 
+                                            
+                                                
+                                                <LI>.....ref.....aa.py 
+                                            
+                                                
+                                                <LI>.....ref.....__pycache__ 
+                                            
+                                        </UL>
+                                    
+
+                            </TD>	
+                            
+                                    
+                                    
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                           
+                            
+                            
+                            <TD valign=top>				
+                                    
+                                    <P>&nbsp;&nbsp;
+                                    <A class="heiti"  style="font-size:13pt" HREF="./python深入理解/python属性.html">
+                                    python属性
+                                    </A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                  
+                                    <BR>
+                                    
+                                    <!-- 这里加入day模板的index部分 -->
+                                    
+                                        
+                                        
+                                        <UL>
+                                            
+                                                <LI>类属性和实例属性attribute 
+                                            
+                                                <LI>属性的__dict__系统 
+                                            
+                                                <LI>属性的层次性 
+                                            
+                                                <LI>特性property 
+                                            
+                                        </UL>
+                                    
+                                        <UL>
+                                            
+                                                
+                                                <LI>.....ref.....aa.py 
+                                            
+                                                
+                                                <LI>.....ref.....Python深入学习之对象的属性 
+                                            
+                                                
+                                                <LI>.....ref.....Python深入学习之对象的属性_files 
+                                            
+                                        </UL>
+                                    
+
+                            </TD>	
+                            
+                                    
+                                    
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                           
+                            
+                            
+                            <TD valign=top>				
+                                    
+                                    <P>&nbsp;&nbsp;
+                                    <A class="heiti"  style="font-size:13pt" HREF="./python深入理解/python文件阅读思路.html">
+                                    python文件阅读思路
+                                    </A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                  
+                                    <BR>
+                                    
+                                    <!-- 这里加入day模板的index部分 -->
+                                    
+                                        
+                                        
+                                        <UL>
+                                            
+                                                <LI>文件内部结构 
+                                            
+                                                <LI>文件夹组织关系 
+                                            
+                                                <LI>理解python基本模块和概念 
+                                            
+                                        </UL>
+                                    
+                                        <UL>
+                                            
+                                        </UL>
+                                    
+
+                            </TD>	
+                            
+                                    
+                                    
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                           
+                            
+                            
+                            <TD valign=top>				
+                                    
+                                    <P>&nbsp;&nbsp;
+                                    <A class="heiti"  style="font-size:13pt" HREF="./python深入理解/python模块管理思路.html">
+                                    python模块管理思路
+                                    </A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                  
+                                    <BR>
+                                    
+                                    <!-- 这里加入day模板的index部分 -->
+                                    
+                                        
+                                        
+                                        <UL>
+                                            
+                                                <LI>模块的概念 
+                                            
+                                                <LI>模块加载和重载 
+                                            
+                                                <LI>一个py文件就是一个模块 
+                                            
+                                                <LI>一个带__init__.py的目录也是一个模块 
+                                            
+                                                <LI>相对路径 
+                                            
+                                        </UL>
+                                    
+                                        <UL>
+                                            
+                                                
+                                                <LI>.....ref.....2015-10-19_121219.png 
+                                            
+                                                
+                                                <LI>.....ref.....A.py 
+                                            
+                                                
+                                                <LI>.....ref.....B.py 
+                                            
+                                                
+                                                <LI>.....ref.....C 
+                                            
+                                                
+                                                <LI>.....ref.....D 
+                                            
+                                                
+                                                <LI>.....ref.....J 
+                                            
+                                                
+                                                <LI>.....ref.....Python 包的相对导入讲解 _ fooStack 
+                                            
+                                                
+                                                <LI>.....ref.....Python 包的相对导入讲解 _ fooStack_files 
+                                            
+                                                
+                                                <LI>.....ref.....__init__.py 
+                                            
+                                                
+                                                <LI>.....ref.....__pycache__ 
+                                            
+                                        </UL>
+                                    
+
+                            </TD>	
+                            
+                                    
+                                    
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                           
+                            
+                            
+                            <TD valign=top>				
+                                    
+                                    <P>&nbsp;&nbsp;
+                                    <A class="heiti"  style="font-size:13pt" HREF="./python深入理解/相对导入.html">
+                                    相对导入
+                                    </A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                  
+                                    <BR>
+                                    
+                                    <!-- 这里加入day模板的index部分 -->
+                                    
+                                        
+                                        
+                                        <UL>
+                                            
+                                                <LI>直接运行_or_import 
+                                            
+                                                <LI>模块的名字如何得来 
+                                            
+                                                <LI>无法相对导入relative_imports 
+                                            
+                                                <LI>模块名字含有 
+                                            
+                                        </UL>
+                                    
+                                        <UL>
+                                            
+                                                
+                                                <LI>.....ref.....Python _ 如何获得Python脚本所在目录的位置 _ Elias的个人主页 
+                                            
+                                                
+                                                <LI>.....ref.....Python _ 如何获得Python脚本所在目录的位置 _ Elias的个人主页_files 
+                                            
+                                                
+                                                <LI>.....ref.....test 
+                                            
+                                        </UL>
+                                    
+
+                            </TD>	
+                             </TR>
+                                    
+                                    
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                           
+                            
+                             <TR>
+                            <TD valign=top>				
+                                    
+                                    <P>&nbsp;&nbsp;
+                                    <A class="heiti"  style="font-size:13pt" HREF="./python深入理解/装饰器.html">
+                                    装饰器
+                                    </A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                  
+                                    <BR>
+                                    
+                                    <!-- 这里加入day模板的index部分 -->
+                                    
+                                        
+                                        
+                                        <UL>
+                                            
+                                                <LI>装饰器的概念 
+                                            
+                                                <LI>不带参数的装饰器 
+                                            
+                                                <LI>带参数的装饰器 
+                                            
+                                                <LI>例子 
+                                            
+                                        </UL>
+                                    
+                                        <UL>
+                                            
+                                                
+                                                <LI>.....ref.....22.py 
+                                            
+                                                
+                                                <LI>.....ref.....Python修饰器的函数式编程 _ 酷 壳 - CoolShell.cn 
+                                            
+                                                
+                                                <LI>.....ref.....Python修饰器的函数式编程 _ 酷 壳 - CoolShell.cn_files 
+                                            
+                                                
+                                                <LI>.....ref.....[翻译]理解python中的装饰器 
+                                            
+                                                
+                                                <LI>.....ref.....[翻译]理解python中的装饰器_files 
+                                            
+                                                
+                                                <LI>.....ref.....__pycache__ 
+                                            
+                                                
+                                                <LI>.....ref.....装饰器.py 
+                                            
+                                        </UL>
+                                    
+
+                            </TD>	
+                            
+                                    
+                                    
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                           
+                            
+                            
+                            <TD valign=top>				
+                                    
+                                    <P>&nbsp;&nbsp;
+                                    <A class="heiti"  style="font-size:13pt" HREF="./python深入理解/迭代器生成器.html">
+                                    迭代器生成器
+                                    </A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                  
+                                    <BR>
+                                    
+                                    <!-- 这里加入day模板的index部分 -->
+                                    
+                                        
+                                        
+                                        <UL>
+                                            
+                                                <LI>非常棒的文章 
+                                            
+                                                <LI>yield生成器(generator) 
+                                            
+                                        </UL>
+                                    
+                                        <UL>
+                                            
+                                                
+                                                <LI>.....ref.....01.png 
+                                            
+                                                
+                                                <LI>.....ref.....02.png 
+                                            
+                                                
+                                                <LI>.....ref.....03.png 
+                                            
+                                                
+                                                <LI>.....ref.....04.png 
+                                            
+                                                
+                                                <LI>.....ref.....05.png 
+                                            
+                                                
+                                                <LI>.....ref.....06.png 
+                                            
+                                                
+                                                <LI>.....ref.....07.png 
+                                            
+                                                
+                                                <LI>.....ref.....08.png 
+                                            
+                                                
+                                                <LI>.....ref.....09.png 
+                                            
+                                                
+                                                <LI>.....ref.....10.png 
+                                            
+                                                
+                                                <LI>.....ref.....11.png 
+                                            
+                                                
+                                                <LI>.....ref.....12.png 
+                                            
+                                                
+                                                <LI>.....ref.....13.png 
+                                            
+                                                
+                                                <LI>.....ref.....14.png 
+                                            
+                                                
+                                                <LI>.....ref.....15.png 
+                                            
+                                                
+                                                <LI>.....ref.....cycles_transparent_texture中文.blend 
+                                            
+                                                
+                                                <LI>.....ref.....Iterables vs. Iterators vs. Generators 
+                                            
+                                                
+                                                <LI>.....ref.....Iterables vs. Iterators vs. Generators_files 
+                                            
+                                                
+                                                <LI>.....ref.....Loop like a native- while, for, iterators, generators.mp4 
+                                            
+                                                
+                                                <LI>.....ref.....ppp.py 
+                                            
+                                                
+                                                <LI>.....ref.....Python yield 使用浅析 
+                                            
+                                                
+                                                <LI>.....ref.....Python yield 使用浅析_files 
+                                            
+                                                
+                                                <LI>.....ref.....relationships.png 
+                                            
+                                                
+                                                <LI>.....ref.....提高你的Python_ 解释‘yield’和‘Generators（生成器）’ - 技术翻译 - 开源中国社区 
+                                            
+                                                
+                                                <LI>.....ref.....提高你的Python_ 解释‘yield’和‘Generators（生成器）’ - 技术翻译 - 开源中国社区_files 
+                                            
+                                        </UL>
+                                    
+
+                            </TD>	
+                            
+                                    
+                                    
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                           
+                            
+                            
+                            <TD valign=top>				
+                                    
+                                    <P>&nbsp;&nbsp;
+                                    <A class="heiti"  style="font-size:13pt" HREF="./python深入理解/闭包.html">
+                                    闭包
+                                    </A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                  
+                                    <BR>
+                                    
+                                    <!-- 这里加入day模板的index部分 -->
+                                    
+                                        
+                                        
+                                        <UL>
+                                            
+                                                <LI>闭包的理解 
+                                            
+                                        </UL>
+                                    
+                                        <UL>
+                                            
+                                                
+                                                <LI>.....ref.....ppp.py 
+                                            
+                                                
+                                                <LI>.....ref.....Python Closures Explained _ Shut Up and Ship 
+                                            
+                                                
+                                                <LI>.....ref.....Python Closures Explained _ Shut Up and Ship_files 
+                                            
+                                        </UL>
+                                    
+
+                            </TD>	
+                            
+                                    
+                                    
+                        
+                    
+                    
+                    
+            
+                    
+                        
+                        
+                    
+                    
+                    
+            
+		
+		
+		
+		</TABLE>
+
+
+	</BODY>
+    
+    <!-- **keywords="python反射或自省|python命名空间|python属性|python文件阅读思路|python模块管理思路|相对导入|装饰器|迭代器生成器|闭包" -->
+
+</HTML>
