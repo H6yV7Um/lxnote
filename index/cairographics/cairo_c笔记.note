@@ -1,0 +1,288 @@
+* 基本概念
+** surface/destination
+- 可以作画板或画布理解。
+- 画板可以是svg、pdf、png等。
+- 不同的画板类似于现实中不同的纸张，可以画出不同的格式。
+<<surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 500, 500);>>
+<<surface = cairo_pdf_surface_create("pdffile.pdf", 504, 648);>>
+<<surface = cairo_svg_surface_create("svgfile.svg", 390, 60);>>
+** source
+- 可以理解为画笔。
+- 可以是简单的颜色。
+- 可以是pattern。
+- 可以是另一个surface，类似图章和复制。
+- 
+
+** mask
+- 蒙板
+- 
+
+** context
+- 所有当前绘图设置的总体。
+- context包括surface,source,line_width等待。
+* 编译
+<<gcc -o aa text.c `pkg-config  --libs --cflags  cairo`   && ./aa>>
+或
+<<gcc -o aa text.c $(pkg-config  --libs --cflags  cairo)  && ./aa>>
+注意源文件写在pkg-config前面。
+
+* 图片作为mask
+- 图片作为mask由图片自身的alpha通道起作用，而不是灰度。
+<<
+#include<cairo.h>
+#include<cmath>
+#include <iostream>
+int main(){
+//建立基本的surface和cairo context
+  using namespace std;
+  cairo_t *cr;
+  int              w, h;
+  cairo_surface_t *image, *surface,*mask,*aa;
+ 
+
+  image = cairo_image_surface_create_from_png ("data/bb.png");
+  aa = cairo_image_surface_create_from_png ("data/aa.png");
+  mask = cairo_image_surface_create_from_png ("data/mask.png");
+  w = cairo_image_surface_get_width (image);
+  h = cairo_image_surface_get_height (image);
+  cout << w << " " <<h;
+  
+  //建立一个和想要处理图片一样大的png surface
+  surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, w, h);
+  //当前context的target就是该png surface
+  cr = cairo_create (surface);
+  
+  
+  // cairo_arc (cr, w/2.0, h/2.0, w*0.5-2, 0, 2*M_PI);
+  // cairo_clip (cr);
+  //cairo_scale (cr, 500.0/w, 500.0/h);
+  //将原图片copy过来
+  cairo_set_source_surface (cr, image, 0, 0);
+  //draw bb image
+  cairo_paint (cr);
+  //add aa image
+  cairo_set_source_surface (cr, aa, 0, 0);
+  //mask_surface本身已经做了drawing operator,如果需要在mask中继续drawing，要用clip。
+  cairo_mask_surface(cr,mask,30,300);
+  cairo_surface_write_to_png (surface,"image_op.png");
+  cairo_surface_destroy (aa);
+  cairo_surface_destroy (image);
+  cairo_surface_destroy (surface);
+  
+}
+
+>>
+* 图片叠合
+<<
+#include<cairo.h>
+#include<cmath>
+#include <iostream>
+int main(){
+//建立基本的surface和cairo context
+  using namespace std;
+  cairo_t *cr;
+  int              w, h;
+  cairo_surface_t *image, *surface,*mask;
+ 
+
+  image = cairo_image_surface_create_from_png ("data/bb.png");
+  
+  mask = cairo_image_surface_create_from_png ("data/mask.png");
+  w = cairo_image_surface_get_width (image);
+  h = cairo_image_surface_get_height (image);
+  cout << w << " " <<h;
+  
+  //建立一个和想要处理图片一样大的png surface
+  surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, w, h);
+  //当前context的target就是该png surface
+  cr = cairo_create (surface);
+  
+  //将原图片copy过来
+  cairo_set_source_surface (cr, image, 0, 0);
+  //draw bb image
+  cairo_paint (cr);
+  //add mask image
+  int w1,h1;
+  w1 = cairo_image_surface_get_width (mask);
+  h1 = cairo_image_surface_get_height (mask);
+  cairo_set_source_surface (cr, mask, w-w1, h-h1);
+  cairo_paint (cr);
+  cairo_surface_write_to_png (surface,"image_op_2.png");
+  cairo_surface_destroy (image);
+  cairo_surface_destroy (surface);
+}
+>>
+* 图片的像素级处理
+<<
+#include<cairo.h>
+#include<cmath>
+#include <iostream>
+int main(){
+//建立基本的surface和cairo context
+  using namespace std;
+  cairo_t *cr;
+  int              w, h;
+  cairo_surface_t *image, *surface;
+  int src_stride;
+  unsigned char *src, *s;
+  image = cairo_image_surface_create_from_png ("data/bb.png");
+  w = cairo_image_surface_get_width (image);
+  h = cairo_image_surface_get_height (image);
+  cout << "width :" << w << endl << "height: " <<h <<endl;
+  
+  //建立一个和想要处理图片一样大的png surface
+  surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, w, h); //ARGB alpha red green blue
+  //当前context的target就是该png surface
+  cr = cairo_create (surface);
+   //将原图片copy过来
+  cairo_set_source_surface (cr, image, 0, 0);
+  cairo_paint (cr);
+  //取得image的data
+  src = cairo_image_surface_get_data (surface);
+  src_stride = cairo_image_surface_get_stride (surface);
+  cout << "stride: " << src_stride <<endl;
+  int i,j;
+  unsigned char p;
+  int x,y,z,a;
+  //开始编辑像素
+  cairo_surface_flush (surface);
+  for (i = 0; i < h; i++) {
+    if(i%100<50){
+    s = (unsigned char *) (src + i * src_stride);
+    for (j = 0; j <  w*4; j++) {
+      
+      if(j%4==2)s[j]/=2;//red
+      if(j%4==1)s[j]/=2;//green
+      if(j%4==0)s[j]/=2;//blue
+      if(j%4==3) s[j]=0x80; //对应alpha,alpha会自动预乘上rgb的值，所以alpha变了之后rgb要相反处理。
+        // CAIRO_FORMAT_ARGB32
+        // each pixel is a 32-bit quantity, with alpha in the upper 8 bits,
+	// then red, then green, then blue. The 32-bit quantities are stored native-endian.
+	// Pre-multiplied alpha is used. (That is, 50% transparent red is 0x80800000, not 0x80ff0000.) 
+
+    }
+    }
+  }
+  cairo_surface_mark_dirty (surface);
+  //结束像素编辑
+  cairo_surface_write_to_png (surface,"image_op_3.png");
+  cairo_surface_destroy (image);
+  cairo_surface_destroy (surface);
+}
+
+>>>>
+* clip
+<<
+#include<cairo.h>
+#include<cmath>
+#include <iostream>
+int main(){
+//建立基本的surface和cairo context
+  using namespace std;
+  cairo_t *cr;
+
+  int              w, h;
+  cairo_surface_t *image, *surface;
+
+  image = cairo_image_surface_create_from_png ("data/bb.png");
+  w = cairo_image_surface_get_width (image);
+  h = cairo_image_surface_get_height (image);
+  cout << w << " " <<h;
+  
+  
+  surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, w, h);
+  cr = cairo_create (surface);
+  cairo_rectangle(cr,0,0,w,h);
+  cairo_set_source_rgb(cr,1,0,0);
+
+  cairo_stroke(cr);
+  
+  cairo_new_path (cr); // path not consumed by clip() 作为clip的开始或结束。
+  cairo_arc (cr, w/2.0, h/2.0, w*0.5-2, 0, 2*M_PI);
+  cairo_clip (cr);
+  //clip之后继续drawing
+ 
+  cairo_set_source_surface (cr, image, 0, 0);
+  cairo_paint (cr);
+  
+  cairo_surface_write_to_png (surface,"image_clip.png");
+
+  cairo_surface_destroy (image);
+  cairo_surface_destroy (surface);
+  
+}
+>>
+* gtk2+cairo
+没办法，xp只能用gtk2.0，我想pycairo出问题肯定也是这个原因。
+ **gtk_lines.c成功了!!**
+ **_下面标出了和网上教程要注意的一些不同之处。_**
+<<
+ gcc -o aa gtk_lines.c $(pkg-config  --libs --cflags  gtk+-2.0 cairo) && ./aa
+>>
+<<
+#include <cairo.h>
+#include <gtk/gtk.h>
+#include <math.h>
+
+static void do_drawing(cairo_t *, GtkWidget *);
+static gboolean
+on_draw_event (GtkWidget *widget, **_GdkEventExpose *event_**, gpointer data)
+{
+    **_cairo_t *cr;_**
+
+    **_cr = gdk_cairo_create (gtk_widget_get_window (widget));_**
+   
+    do_drawing(cr, widget);
+
+    return FALSE;
+}
+static void do_drawing(cairo_t *cr, GtkWidget *widget)
+{
+  GtkWidget *win = gtk_widget_get_toplevel(widget);
+  
+  int width, height;
+  gtk_window_get_size(GTK_WINDOW(win), &width, &height);
+  
+  cairo_set_line_width(cr, 9);  
+  cairo_set_source_rgb(cr, 0.69, 0.19, 0);
+  
+  cairo_translate(cr, width/2, height/2);
+  cairo_arc(cr, 0, 0, 50, 0, 2 * M_PI);
+  cairo_stroke_preserve(cr);
+
+  cairo_set_source_rgb(cr, 0.3, 0.4, 0.6); 
+  cairo_fill(cr);      
+}
+
+
+
+
+int main (int argc, char *argv[])
+{
+  GtkWidget *window;
+  GtkWidget *darea;
+  
+  gtk_init(&argc, &argv);
+
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+
+  darea = gtk_drawing_area_new();
+  gtk_container_add(GTK_CONTAINER(window), darea);
+
+  g_signal_connect(G_OBJECT(darea), "**_expose-event_**", 
+      G_CALLBACK(on_draw_event), NULL);
+  g_signal_connect(G_OBJECT(window), "destroy",
+      G_CALLBACK(gtk_main_quit), NULL);
+
+  gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+  gtk_window_set_default_size(GTK_WINDOW(window), 300, 200); 
+  gtk_window_set_title(GTK_WINDOW(window), "Fill & stroke");
+
+  gtk_widget_show_all(window);
+
+  gtk_main();
+
+  return 0;
+}
+
+>>
