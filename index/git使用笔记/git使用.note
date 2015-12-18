@@ -3,8 +3,8 @@
 ** 分支branch
 每次checkout切换分支，工作区都会随之改变。
 - checkout有酒店结账，检出的意思，就是表示状态改变了，工作区重置。
-- checkout也不一定切换到分支，可以切换到文件：
--- git checkout <分支> -- <file>
+- checkout也不一定切换到分支，可以检出到文件(repository->workspace)：
+-- git checkout <分支> -- < file >
 
 ** 版本库repository
 工作区有一个隐藏目录.git,这个不属于工作区，这是版本库。其中版本库里面存了很多东西，其中最重要的就是stage(暂存区)，还有Git为我们自动创建了第一个分支master,以及指向master的一个指针HEAD。
